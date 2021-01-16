@@ -420,13 +420,12 @@ public class Loguin_interfaz extends javax.swing.JFrame {
             outputSocket.println("C4-LOG_TRABAJADOR:" + dni + "," + clave);
             outputSocket.flush();
             String mensajeEntrada = inputSocket.readLine();
+            
             if(mensajeEntrada.contains("S2-LOG_INCORRECTO")){
                 resultado=-1;
             }else if(mensajeEntrada.contains("S10-LOG_CORRECTO_TR")){
                 String rol=Utilidades.obtenerParametro(mensajeEntrada, 1);
-                System.out.println("Rol recibido:"+rol);
                 String nombre=Utilidades.obtenerParametro(mensajeEntrada, 2);
-                System.out.println("Nombre Recibido:"+nombre);
                 String apellidos=Utilidades.obtenerParametro(mensajeEntrada, 3);
                 this.nombreUsuario=nombre+" "+apellidos;
                 resultado=Integer.parseInt(rol);
@@ -453,9 +452,11 @@ public class Loguin_interfaz extends javax.swing.JFrame {
             conexionSocket = new Socket("192.168.0.11", 9002);
             outputSocket = new PrintWriter(conexionSocket.getOutputStream());
             inputSocket = new BufferedReader(new InputStreamReader(conexionSocket.getInputStream()));
+            
 
-            System.out.println(outputSocket);
+            
         } catch (IOException e) {
+            e.printStackTrace();
             error_lb.setText("Error de conexion con servidor ¿Volver a intentar?");
         }
     }

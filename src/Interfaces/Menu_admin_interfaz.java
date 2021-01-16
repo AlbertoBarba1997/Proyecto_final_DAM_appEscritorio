@@ -5,11 +5,11 @@
  */
 package Interfaces;
 
-import Paneles.CambiaPanel;
-import Paneles.pnl_Claves;
-import Paneles.pnl_Clientes;
-import Paneles.pnl_Home_Adm;
-import Paneles.pnl_Trabajadores;
+import Paneles_Admin.CambiaPanel;
+import Paneles_Admin.pnl_Claves;
+import Paneles_Admin.pnl_Clientes;
+import Paneles_Admin.pnl_Home_Adm;
+import Paneles_Admin.pnl_Trabajadores;
 
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -36,16 +36,11 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
     
     
     public Menu_admin_interfaz() {
-        
+    
         initComponents();
-        
-        
         setLocationRelativeTo(this);
-        
-        //menu_panel.setVisible(false);
-        //esconderMenu();
-        colorFondo=new Color(186,79,84);
-        
+        colorFondo = new Color(186, 79, 84);
+
     }
     
      public Menu_admin_interfaz(BufferedReader inSocket, PrintWriter outSocket, String nombreUsuario) {
@@ -55,9 +50,7 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
          colorFondo = new Color(186, 79, 84);
 
          initComponents();
-         //iniciarConexion();
 
-         System.out.println("Nombre que llega a la interfaz menu:" + nombreUsuario);
          this.nombreUsuario_lb.setText(nombreUsuario);
 
          setLocationRelativeTo(this);
@@ -181,6 +174,11 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
                 clientes_btMouseClicked(evt);
             }
         });
+        clientes_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clientes_btActionPerformed(evt);
+            }
+        });
 
         trabajadores_bt.setBackground(new java.awt.Color(74, 31, 61));
         trabajadores_bt.setForeground(new java.awt.Color(204, 204, 204));
@@ -219,6 +217,11 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
                 clavesAcceso_btMouseClicked(evt);
             }
         });
+        clavesAcceso_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clavesAcceso_btActionPerformed(evt);
+            }
+        });
 
         cerrarSession_bt.setBackground(new java.awt.Color(74, 31, 61));
         cerrarSession_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_exit_40px_1.png"))); // NOI18N
@@ -243,16 +246,12 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
         menu_panelLayout.setHorizontalGroup(
             menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(cerrarSession_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(menu_panelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(clientes_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(trabajadores_bt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(nombreUsuario_lb, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(clavesAcceso_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+            .addComponent(clientes_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(trabajadores_bt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(nombreUsuario_lb, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(clavesAcceso_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
         );
         menu_panelLayout.setVerticalGroup(
             menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -367,6 +366,14 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
     private void clavesAcceso_btMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clavesAcceso_btMouseClicked
         new CambiaPanel(this.contenido_panel, new pnl_Claves(this,inSocket,outSocket));
     }//GEN-LAST:event_clavesAcceso_btMouseClicked
+
+    private void clientes_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientes_btActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clientes_btActionPerformed
+
+    private void clavesAcceso_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clavesAcceso_btActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_clavesAcceso_btActionPerformed
    
     
     

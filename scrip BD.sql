@@ -24,7 +24,9 @@ VALUES (1, 'administrador', '0402'), (2, 'entrenador', '1234'), (3, 'cliente', n
 
 
 
+
 create table USUARIO(
+	id INT NOT NULL auto_increment,
 	DNI VARCHAR(10) NOT NULL UNIQUE,
     nombre VARCHAR(15),
     apellido VARCHAR(20),  
@@ -32,18 +34,38 @@ create table USUARIO(
     contraseña VARCHAR(20) default NULL,
     fecha DATE default NULL,
     salario FLOAT default NULL,
+    rutaImg VARCHAR(120) default '',
+    peso INT default 0,
+    altura FLOAT default 0,
+    notas VARCHAR(200),
     id_rol INT default 3,
     
-	PRIMARY KEY (DNI),
+	PRIMARY KEY (id),
 	CONSTRAINT FK_UsuarioRol FOREIGN KEY (id_rol) REFERENCES ROL(id)
 );
 
-INSERT INTO USUARIO (DNI, nombre, apellido, correo, contraseña, fecha, salario, id_rol) VALUES
-('45380203F', 'Alberto', 'Barba', 'juanalbertobarba1997@gmail.com', null, '1997-12-23', 1500, 1 ),
-('46785479D', 'Miguel Angel', 'Bolivar', 'mabolivar@gmail.es', null, '1980-03-22', 1200, 2),
-('38789868G', 'Marisa', 'Garrido', 'marisa@hotmail.com', null, '1988-04-11', 1100, 4),
-('49650746S', 'Antonio', 'Serrano', 'admin1@yahoo.com', null, '1976-12-13', 1500, 1 ),
-('39576918A', 'Primer Cliente', 'xd', 'cliente1@gmail.com', null, '1976-12-13', null, 3 );
+
+INSERT INTO USUARIO (DNI, nombre, apellido, correo, contraseña, fecha, salario, rutaImg, id_rol) VALUES
+('45380203F', 'Alberto', 'Barba', 'juanalbertobarba1997@gmail.com', null, '1997-12-23', 1500,'', 1 ),
+('46785479D', 'Miguel Angel', 'Bolivar', 'mabolivar@gmail.es', null, '1980-03-22', 1200,'', 2),
+('38789868G', 'Marisa', 'Garrido', 'marisa@hotmail.com', null, '1988-04-11', 1100,'', 4),
+('49650746S', 'Antonio', 'Serrano', 'admin1@yahoo.com', null, '1976-12-13', 1500,'', 1 ),
+('39576918A', 'Primer Cliente', 'xd', 'cliente1@gmail.com', contraseña, '1976-12-13', null,'', 3 ),
+('49896715B', 'Segundo cliente', 'xd', 'cliente2@gmail.com', null, '1976-12-13', null,'', 3 );
+
+
+
+create table CLASE(
+	id INT NOT NULL auto_increment,
+    nombre VARCHAR(15) NOT NULL UNIQUE,
+    aforo_maximo INT NOT NULL,  
+    rutaImg VARCHAR(80) default '',
+    descripcion VARCHAR(300) default '',
+    
+	PRIMARY KEY (id)
+	
+);
+//LO DEL PROFESOR QUE LA IMPARTE IRA EN EL MISMO HORARIO DE CLASE.
 
 
 create table CLASE(
