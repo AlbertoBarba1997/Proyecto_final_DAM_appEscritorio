@@ -402,7 +402,7 @@ public class pnl_Clases extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MousePressed
 
     private void horario_lb1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horario_lb1MouseClicked
-        interfaz_menu_padre.cambiarPanelContenido(new pnl_Horarios(interfaz_menu_padre, inSocket, outSocket));
+        interfaz_menu_padre.cambiarPanelContenido(new pnl_Horario(interfaz_menu_padre, inSocket, outSocket));
     }//GEN-LAST:event_horario_lb1MouseClicked
 
     private void horario_lb1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horario_lb1MouseEntered
@@ -438,7 +438,7 @@ public class pnl_Clases extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void cargarTablaClases() {
-        Thread thread_cargarTrabajadores = new Thread(new Runnable() {
+        Thread thread_cargarClases = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -467,8 +467,8 @@ public class pnl_Clases extends javax.swing.JPanel {
                 }
             }
         });
-
-        thread_cargarTrabajadores.start();
+        thread_cargarClases.setDaemon(true);
+        thread_cargarClases.start();
 
     }
 

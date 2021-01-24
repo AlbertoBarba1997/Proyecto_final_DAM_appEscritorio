@@ -65,9 +65,63 @@ create table CLASE(
 	PRIMARY KEY (id)
 	
 );
-//LO DEL PROFESOR QUE LA IMPARTE IRA EN EL MISMO HORARIO DE CLASE.
+
+create table HORARIO(
+	id INT NOT NULL auto_increment UNIQUE,
+	id_clase INT NOT NULL,
+	id_entrenador INT NOT NULL,
+	hora TIME NOT NULL,
+	dia INT NOT NULL,
+
+	PRIMARY KEY (hora,dia,id_entrenador),
+	CONSTRAINT FK_clase_horario FOREIGN KEY (id_clase) REFERENCES CLASE(id),
+	CONSTRAINT FK_entrenador_horario FOREIGN KEY (id_entrenador) REFERENCES USUARIO(id)
+
+);
+
+//El UNIQUE lo interpreta como prymary key tmbn, sin UNIQUE no furunda
+
+create table EJERCICIO(
+	id INT NOT NULL auto_increment,
+	nombre VARCHAR(40) UNIQUE,
+	descripcion VARCHAR(80),
+	tipo VARCHAR(20),
+	rutaImg VARCHAR(80),
+	rutaVideo VARCHAR(80),
+
+	PRIMARY KEY (id)
+
+);
+
+create table MUSCULO(
+	id INT NOT NULL auto_increment,
+	nombre VARCHAR(40) UNIQUE,
+
+	PRIMARY KEY (id)
+)
+
+create table EJERCICIO_MUSCULO_MTM(
+	id_ejercicio INT not null,
+	id_musculo INT not null,
+
+	PRIMARY KEY(id_ejercicio,id_musculo),
+	FOREIGN KEY (id_ejercicio) REFERENCES EJERCICIO(id), 
+    FOREIGN KEY (id_musculo) REFERENCES MUSCULO(id)	
+
+);
 
 
+
+
+
+
+
+
+
+
+
+
+/////////// LA MIERDA INICIAL
 create table CLASE(
 	id INT NOT NULL auto_increment,
     nombre VARCHAR(15),

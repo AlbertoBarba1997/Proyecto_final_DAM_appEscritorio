@@ -11,6 +11,7 @@ import Paneles_Admin.pnl_Claves;
 import Paneles_coach.pnl_AltaClase;
 import Paneles_coach.pnl_Clases;
 import Paneles_coach.pnl_Home_Coach;
+import Paneles_coach.pnl_Horario;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -393,7 +394,7 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_home_btActionPerformed
 
     private void clases_bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clases_bt1ActionPerformed
-        // TODO add your handling code here:
+        cambiarPanelContenido( new pnl_Horario(this,inSocket,outSocket));
     }//GEN-LAST:event_clases_bt1ActionPerformed
 
     private void contenido_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contenido_panelMouseClicked

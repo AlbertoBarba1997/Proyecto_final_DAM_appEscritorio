@@ -100,11 +100,14 @@ public class Utilidades {
 
         char[] caracteres = theInput.toCharArray();
         String parametro = "";
-
+        boolean comenzo=false;
+        
         for (char c : caracteres) {
-
-            if (c == ':') {
+            
+            if (c == ':'&& comenzo==false) {
                 nParametro++;
+                comenzo=true;
+                
             } else if (c == ',') {
                 nParametro++;
             } else if (nParametro == nParametroBuscado) {
@@ -160,6 +163,37 @@ public class Utilidades {
         atributosCliente[3] = obtenerAtributo(parametroCliente, 3, separador);
 
         return atributosCliente;
+
+    }
+    
+    public static String[] obtenerHorario(String parametroCliente) {
+        String[] atributosHorario = new String[4];
+        final String separador = "&";
+        atributosHorario[0] = obtenerAtributo(parametroCliente, 0, separador);  //id
+        atributosHorario[1] = obtenerAtributo(parametroCliente, 1, separador);  //dia
+        atributosHorario[2] = obtenerAtributo(parametroCliente, 2, separador);  //hora
+        atributosHorario[3] = obtenerAtributo(parametroCliente, 3, separador);  //nombreClase
+
+        return atributosHorario;
+
+    }
+    public static String[] obtenerEntrenadores(String parametroCliente) {
+        String[] atributosEntrenador = new String[4];
+        final String separador = "&";
+        atributosEntrenador[0] = obtenerAtributo(parametroCliente, 0, separador);  //id
+        atributosEntrenador[1] = obtenerAtributo(parametroCliente, 1, separador);  //nombre
+        atributosEntrenador[2] = obtenerAtributo(parametroCliente, 2, separador);  //apellidos
+
+        return atributosEntrenador;
+
+    }
+    public static String[] obtenerClase(String parametroCliente) {
+        String[] atributosClase = new String[4];
+        final String separador = "&";
+        atributosClase[0] = obtenerAtributo(parametroCliente, 0, separador);  //id
+        atributosClase[1] = obtenerAtributo(parametroCliente, 1, separador);  //nombre
+        
+        return atributosClase;
 
     }
 
