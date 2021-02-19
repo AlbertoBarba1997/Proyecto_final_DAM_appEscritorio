@@ -629,7 +629,7 @@ public class pnl_AltaCliente extends javax.swing.JPanel {
                 }
             }
         });
-
+        thread_altaCliente.setDaemon(true);
         thread_altaCliente.start();
     }
 

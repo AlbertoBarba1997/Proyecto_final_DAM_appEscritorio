@@ -33,8 +33,10 @@ import javax.swing.JLabel;
 public class pnl_AltaClase extends javax.swing.JPanel {
 
     Menu_coach_interfaz interfaz_menu_padre;
+    Menu_admin_interfaz interfaz_menu_padre_admin;
     BufferedReader inSocket;
     PrintWriter outSocket;
+    boolean admin=false;
     
    
     
@@ -43,7 +45,15 @@ public class pnl_AltaClase extends javax.swing.JPanel {
         this.interfaz_menu_padre=interfaz_menu_padre;
         this.inSocket=inSocket;
         this.outSocket=outSocket;
-     
+        
+    }
+     public pnl_AltaClase(Menu_admin_interfaz interfaz_menu_padre_admin, BufferedReader inSocket, PrintWriter outSocket ) {
+        initComponents();
+        this.interfaz_menu_padre_admin=interfaz_menu_padre_admin;
+        admin=true;
+        this.inSocket=inSocket;
+        this.outSocket=outSocket;
+        
     }
 
    

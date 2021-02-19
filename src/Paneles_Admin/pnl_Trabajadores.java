@@ -191,9 +191,6 @@ public class pnl_Trabajadores extends javax.swing.JPanel {
         patronBuscar_tf.setCaretColor(new java.awt.Color(255, 255, 255));
         patronBuscar_tf.setOpaque(false);
         patronBuscar_tf.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                patronBuscar_tfKeyPressed(evt);
-            }
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 patronBuscar_tfKeyReleased(evt);
             }
@@ -372,35 +369,10 @@ public class pnl_Trabajadores extends javax.swing.JPanel {
         
     }//GEN-LAST:event_modificar_lbMouseClicked
 
-    private void patronBuscar_tfKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_patronBuscar_tfKeyPressed
-        
-    }//GEN-LAST:event_patronBuscar_tfKeyPressed
-
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         String patron=patronBuscar_tf.getText();
         cargarTablaTrabajadoresBusqueda(patron);
     }//GEN-LAST:event_jLabel2MouseClicked
-
-    private void patronBuscar_tfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_patronBuscar_tfKeyReleased
-        String patron=patronBuscar_tf.getText();
-        int nRol=rol_combo.getSelectedIndex();
-        char teclaPulsada=evt.getKeyChar();
-        
-        if(((int)teclaPulsada)==10){                                     //Si es un intro la tecla pulsada busca
-            if(nRol==0) cargarTablaTrabajadoresBusqueda(patron);
-            else filtrarRolTrabajador(nRol);
-           
-        }                           
-        else if((((int)teclaPulsada)==8)&&(patron.length()<=0)){        //Si pulsa la tecla borrar y deja vacio la barra buscadora se resetea
-            if(nRol==0) cargarTablaTrabajadores();
-            else filtrarRolTrabajador(nRol);
-
-        }             
-        else if(patron.length()>=2){                                    //La barra busca automaticamente a partir de los 2 caracteres
-            if(nRol==0) cargarTablaTrabajadoresBusqueda(patron);
-            else filtrarRolTrabajador(nRol);
-        }
-    }//GEN-LAST:event_patronBuscar_tfKeyReleased
 
     private void rol_comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rol_comboActionPerformed
         int indiceSeleccionado = rol_combo.getSelectedIndex();
@@ -440,6 +412,27 @@ public class pnl_Trabajadores extends javax.swing.JPanel {
     private void nuevoRol_lbMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevoRol_lbMouseExited
         opcionFocusLost(evt);
     }//GEN-LAST:event_nuevoRol_lbMouseExited
+
+    private void patronBuscar_tfKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_patronBuscar_tfKeyReleased
+        String patron=patronBuscar_tf.getText();
+        int nRol=rol_combo.getSelectedIndex();
+        char teclaPulsada=evt.getKeyChar();
+
+        if(((int)teclaPulsada)==10){                                     //Si es un intro la tecla pulsada busca
+            if(nRol==0) cargarTablaTrabajadoresBusqueda(patron);
+            else filtrarRolTrabajador(nRol);
+
+        }
+        else if((((int)teclaPulsada)==8)&&(patron.length()<=0)){        //Si pulsa la tecla borrar y deja vacio la barra buscadora se resetea
+            if(nRol==0) cargarTablaTrabajadores();
+            else filtrarRolTrabajador(nRol);
+
+        }
+        else if(patron.length()>=2){                                    //La barra busca automaticamente a partir de los 2 caracteres
+            if(nRol==0) cargarTablaTrabajadoresBusqueda(patron);
+            else filtrarRolTrabajador(nRol);
+        }
+    }//GEN-LAST:event_patronBuscar_tfKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

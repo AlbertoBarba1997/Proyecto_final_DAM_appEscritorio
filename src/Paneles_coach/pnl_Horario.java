@@ -47,10 +47,10 @@ import javax.swing.table.TableColumnModel;
  */
 public class pnl_Horario extends javax.swing.JPanel {
 
-    Menu_coach_interfaz interfaz_menu_padre;
+    Menu_admin_interfaz interfaz_menu_padre;
     BufferedReader inSocket;
     PrintWriter outSocket;
-
+    
     DefaultTableModel defaultTableMode;
     JTable[] tablasDias;
     JScrollPane[] panelesTablasDias;
@@ -60,7 +60,7 @@ public class pnl_Horario extends javax.swing.JPanel {
     String dniSeleccionado = null;
     String rutaFotoSeleccionada = null;
 
-    public pnl_Horario(Menu_coach_interfaz interfaz_menu_padre, BufferedReader inSocket, PrintWriter outSocket){
+    public pnl_Horario(Menu_admin_interfaz interfaz_menu_padre, BufferedReader inSocket, PrintWriter outSocket){
         initComponents();
         filtradoRolAnterior = 0;
         this.interfaz_menu_padre = interfaz_menu_padre;
@@ -77,6 +77,9 @@ public class pnl_Horario extends javax.swing.JPanel {
         
         
     }
+
+   
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -150,21 +153,21 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
 
         jTable1.setBackground(new java.awt.Color(222, 222, 222));
-        jTable1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTable1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jTable1.setForeground(new java.awt.Color(0, 0, 0));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Hora", "Clase", "id"
+                "Hora", "Clase", "id", "Entrenador"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -192,9 +195,8 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(1).setMinWidth(125);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(125);
-            jTable1.getColumnModel().getColumn(1).setMaxWidth(125);
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(60);
             jTable1.getColumnModel().getColumn(2).setMinWidth(0);
             jTable1.getColumnModel().getColumn(2).setPreferredWidth(0);
             jTable1.getColumnModel().getColumn(2).setMaxWidth(0);
@@ -262,22 +264,29 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
 
         jTable2.setBackground(new java.awt.Color(222, 222, 222));
-        jTable2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTable2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jTable2.setForeground(new java.awt.Color(0, 0, 0));
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Hora", "Clase", "id"
+                "Hora", "Clase", "id", "Entrenador"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable2.setGridColor(new java.awt.Color(255, 255, 255));
@@ -297,9 +306,8 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(1).setMinWidth(125);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(125);
-            jTable2.getColumnModel().getColumn(1).setMaxWidth(125);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTable2.getColumnModel().getColumn(1).setPreferredWidth(60);
             jTable2.getColumnModel().getColumn(2).setMinWidth(0);
             jTable2.getColumnModel().getColumn(2).setPreferredWidth(0);
             jTable2.getColumnModel().getColumn(2).setMaxWidth(0);
@@ -316,22 +324,29 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
 
         jTable3.setBackground(new java.awt.Color(222, 222, 222));
-        jTable3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTable3.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jTable3.setForeground(new java.awt.Color(0, 0, 0));
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Hora", "Clase", "id"
+                "Hora", "Clase", "id", "Entrenador"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable3.setGridColor(new java.awt.Color(255, 255, 255));
@@ -351,9 +366,8 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(jTable3);
         if (jTable3.getColumnModel().getColumnCount() > 0) {
-            jTable3.getColumnModel().getColumn(1).setMinWidth(125);
-            jTable3.getColumnModel().getColumn(1).setPreferredWidth(125);
-            jTable3.getColumnModel().getColumn(1).setMaxWidth(125);
+            jTable3.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTable3.getColumnModel().getColumn(1).setPreferredWidth(60);
             jTable3.getColumnModel().getColumn(2).setMinWidth(0);
             jTable3.getColumnModel().getColumn(2).setPreferredWidth(0);
             jTable3.getColumnModel().getColumn(2).setMaxWidth(0);
@@ -370,21 +384,21 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
 
         jTable4.setBackground(new java.awt.Color(222, 222, 222));
-        jTable4.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTable4.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jTable4.setForeground(new java.awt.Color(0, 0, 0));
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Hora", "Clase", "id"
+                "Hora", "Clase", "id", "Entrenador"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -412,9 +426,8 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
         jScrollPane4.setViewportView(jTable4);
         if (jTable4.getColumnModel().getColumnCount() > 0) {
-            jTable4.getColumnModel().getColumn(1).setMinWidth(125);
-            jTable4.getColumnModel().getColumn(1).setPreferredWidth(125);
-            jTable4.getColumnModel().getColumn(1).setMaxWidth(125);
+            jTable4.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTable4.getColumnModel().getColumn(1).setPreferredWidth(60);
             jTable4.getColumnModel().getColumn(2).setMinWidth(0);
             jTable4.getColumnModel().getColumn(2).setPreferredWidth(0);
             jTable4.getColumnModel().getColumn(2).setMaxWidth(0);
@@ -431,22 +444,29 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
 
         jTable5.setBackground(new java.awt.Color(222, 222, 222));
-        jTable5.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTable5.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jTable5.setForeground(new java.awt.Color(0, 0, 0));
         jTable5.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Hora", "Clase", "id"
+                "Hora", "Clase", "id", "Entrenador"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable5.setGridColor(new java.awt.Color(255, 255, 255));
@@ -466,9 +486,8 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
         jScrollPane5.setViewportView(jTable5);
         if (jTable5.getColumnModel().getColumnCount() > 0) {
-            jTable5.getColumnModel().getColumn(1).setMinWidth(125);
-            jTable5.getColumnModel().getColumn(1).setPreferredWidth(125);
-            jTable5.getColumnModel().getColumn(1).setMaxWidth(125);
+            jTable5.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTable5.getColumnModel().getColumn(1).setPreferredWidth(60);
             jTable5.getColumnModel().getColumn(2).setMinWidth(0);
             jTable5.getColumnModel().getColumn(2).setPreferredWidth(0);
             jTable5.getColumnModel().getColumn(2).setMaxWidth(0);
@@ -485,22 +504,29 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
 
         jTable6.setBackground(new java.awt.Color(222, 222, 222));
-        jTable6.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTable6.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
         jTable6.setForeground(new java.awt.Color(0, 0, 0));
         jTable6.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Hora", "Clase", "id"
+                "Hora", "Clase", "id", "Entrenador"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable6.setGridColor(new java.awt.Color(255, 255, 255));
@@ -520,9 +546,8 @@ public class pnl_Horario extends javax.swing.JPanel {
         });
         jScrollPane6.setViewportView(jTable6);
         if (jTable6.getColumnModel().getColumnCount() > 0) {
-            jTable6.getColumnModel().getColumn(1).setMinWidth(125);
-            jTable6.getColumnModel().getColumn(1).setPreferredWidth(125);
-            jTable6.getColumnModel().getColumn(1).setMaxWidth(125);
+            jTable6.getColumnModel().getColumn(0).setPreferredWidth(40);
+            jTable6.getColumnModel().getColumn(1).setPreferredWidth(60);
             jTable6.getColumnModel().getColumn(2).setMinWidth(0);
             jTable6.getColumnModel().getColumn(2).setPreferredWidth(0);
             jTable6.getColumnModel().getColumn(2).setMaxWidth(0);
@@ -1380,8 +1405,9 @@ public class pnl_Horario extends javax.swing.JPanel {
                 int idHorario=Integer.parseInt(atributosHorario[0]);
                 String hora=atributosHorario[2];
                 String nombreClase=atributosHorario[3];
+                String nombreEntrenador=atributosHorario[4];
                 
-                Object[] fila={hora,nombreClase,idHorario};
+                Object[] fila={hora,nombreClase,idHorario, nombreEntrenador};
                 tablaAfectada.addRow(fila);
                 
             }
@@ -1429,7 +1455,13 @@ public class pnl_Horario extends javax.swing.JPanel {
                     if (respuestaServidor.contains("S38-HORARIO_REGISTRADO")){
                         error_lb.setText("Clase añadida al horario.");
                         cargarTablasHorarios();
-                    } else if (respuestaServidor.contains("S39-ERROR_REGISTRO")) {
+                        
+                    }else if(respuestaServidor.contains("S39-ERROR_REGISTRO:Registro duplicado")){
+                        
+                         String nombreEntrenador= (String) entrenadores_tb.getModel().getValueAt(entrenadores_tb.getSelectedRow(), 0);
+                         showMessageDialog(null, "El/La profesor/a "+ nombreEntrenador+" ya tiene una clase a las "+ hora+".");
+                    
+                    } else {
                         
                         try{
                             String mensajeError=Utilidades.obtenerParametro(respuestaServidor, 1);
@@ -1439,10 +1471,7 @@ public class pnl_Horario extends javax.swing.JPanel {
                         }
                         cargarTablasHorarios();
                         
-                    } else {
-                        showMessageDialog(null,"Error de comunicacion con el servidor, pongase en contacto con un tecnico del sistema");
-                        cargarTablasHorarios();
-                    }
+                    } 
 
 
                 } catch (IOException ex) {

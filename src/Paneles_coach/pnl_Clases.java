@@ -31,6 +31,7 @@ import javax.imageio.ImageIO;
 import static javax.swing.BorderFactory.createEmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -41,6 +42,8 @@ import javax.swing.table.DefaultTableModel;
 public class pnl_Clases extends javax.swing.JPanel {
 
     Menu_coach_interfaz interfaz_menu_padre;
+    Menu_admin_interfaz interfaz_menu_padre_admin;
+    boolean admin=false;
     BufferedReader inSocket;
     PrintWriter outSocket;
 
@@ -56,6 +59,19 @@ public class pnl_Clases extends javax.swing.JPanel {
         filtradoRolAnterior = 0;
         this.interfaz_menu_padre = interfaz_menu_padre;
 
+        this.inSocket = inSocket;
+        this.outSocket = outSocket;
+        System.out.println(outSocket);
+
+        darFormatoTabla();
+
+        cargarTablaClases();
+    }
+    public pnl_Clases(Menu_admin_interfaz interfaz_menu_padre_admin, BufferedReader inSocket, PrintWriter outSocket) {
+        initComponents();
+        this.interfaz_menu_padre_admin=interfaz_menu_padre_admin;
+        admin=true;
+        filtradoRolAnterior = 0;
         this.inSocket = inSocket;
         this.outSocket = outSocket;
         System.out.println(outSocket);
@@ -80,7 +96,7 @@ public class pnl_Clases extends javax.swing.JPanel {
         titulo_lb = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        horario_lb = new javax.swing.JLabel();
+        eliminar_lb = new javax.swing.JLabel();
         nuevo_lb = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         descripcion_lb = new javax.swing.JLabel();
@@ -155,19 +171,19 @@ public class pnl_Clases extends javax.swing.JPanel {
             jTable1.getColumnModel().getColumn(0).setMaxWidth(350);
         }
 
-        horario_lb.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
-        horario_lb.setForeground(new java.awt.Color(255, 255, 255));
-        horario_lb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_remove_30px.png"))); // NOI18N
-        horario_lb.setText("Eliminar clase");
-        horario_lb.addMouseListener(new java.awt.event.MouseAdapter() {
+        eliminar_lb.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
+        eliminar_lb.setForeground(new java.awt.Color(255, 255, 255));
+        eliminar_lb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_remove_30px.png"))); // NOI18N
+        eliminar_lb.setText("Eliminar clase");
+        eliminar_lb.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                horario_lbMouseClicked(evt);
+                eliminar_lbMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                horario_lbMouseEntered(evt);
+                eliminar_lbMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                horario_lbMouseExited(evt);
+                eliminar_lbMouseExited(evt);
             }
         });
 
@@ -267,12 +283,12 @@ public class pnl_Clases extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(descripcion_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(descripcion_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         error_lbl.setFont(new java.awt.Font("Dialog", 1, 15)); // NOI18N
@@ -308,13 +324,13 @@ public class pnl_Clases extends javax.swing.JPanel {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(nuevo_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(horario_lb)
+                                    .addComponent(eliminar_lb)
                                     .addComponent(horario_lb1)))
                             .addComponent(error_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 409, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(45, 45, 45)
                         .addComponent(titulo_lb)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 144, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(151, 151, 151))
         );
@@ -333,7 +349,7 @@ public class pnl_Clases extends javax.swing.JPanel {
                         .addGap(28, 28, 28)
                         .addComponent(nuevo_lb)
                         .addGap(18, 18, 18)
-                        .addComponent(horario_lb)
+                        .addComponent(eliminar_lb)
                         .addGap(18, 18, 18)
                         .addComponent(horario_lb1)
                         .addGap(63, 63, 63)
@@ -354,15 +370,16 @@ public class pnl_Clases extends javax.swing.JPanel {
         interfaz_menu_padre.cambiarPanelContenido(new pnl_AltaClase(interfaz_menu_padre, inSocket, outSocket));
     }//GEN-LAST:event_nuevo_lbMouseClicked
 
-    private void horario_lbMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horario_lbMouseExited
+    private void eliminar_lbMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lbMouseExited
         opcionFocusLost(evt);
-    }//GEN-LAST:event_horario_lbMouseExited
+    }//GEN-LAST:event_eliminar_lbMouseExited
 
-    private void horario_lbMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horario_lbMouseEntered
+    private void eliminar_lbMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lbMouseEntered
         opcionFocusGained(evt);
-    }//GEN-LAST:event_horario_lbMouseEntered
+    }//GEN-LAST:event_eliminar_lbMouseEntered
 
-    private void horario_lbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horario_lbMouseClicked
+    private void eliminar_lbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lbMouseClicked
+        if(admin){
         int filaSeleccionada = jTable1.getSelectedRow();
 
         if (filaSeleccionada != -1) {
@@ -376,7 +393,10 @@ public class pnl_Clases extends javax.swing.JPanel {
         } else {
             this.error_lbl.setText("Selecciona un trabajador primero.");
         }
-    }//GEN-LAST:event_horario_lbMouseClicked
+        }else{
+            JOptionPane.showMessageDialog(null, "La opcion de eliminar clases esta reservada para los Aministradores.");
+        }
+    }//GEN-LAST:event_eliminar_lbMouseClicked
 
     private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
 
@@ -402,7 +422,17 @@ public class pnl_Clases extends javax.swing.JPanel {
     }//GEN-LAST:event_jTable1MousePressed
 
     private void horario_lb1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horario_lb1MouseClicked
-        interfaz_menu_padre.cambiarPanelContenido(new pnl_Horario(interfaz_menu_padre, inSocket, outSocket));
+        if (admin) {
+            try{
+                interfaz_menu_padre_admin.cambiarPanelContenido(new pnl_Horario(interfaz_menu_padre_admin, inSocket, outSocket));
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+          
+        } else {
+            JOptionPane.showMessageDialog(null, "Esta opcion esta reservada para administradores");
+        }
+
     }//GEN-LAST:event_horario_lb1MouseClicked
 
     private void horario_lb1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_horario_lb1MouseEntered
@@ -417,8 +447,8 @@ public class pnl_Clases extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel aforo_lb;
     private javax.swing.JLabel descripcion_lb;
+    private javax.swing.JLabel eliminar_lb;
     private javax.swing.JLabel error_lbl;
-    private javax.swing.JLabel horario_lb;
     private javax.swing.JLabel horario_lb1;
     private javax.swing.JTextArea horarios_ta;
     private javax.swing.JLabel imagen_lbl;

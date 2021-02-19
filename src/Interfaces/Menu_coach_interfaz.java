@@ -9,9 +9,13 @@ import Paneles_Admin.CambiaPanel;
 import Paneles_Admin.pnl_AltaTrabajador;
 import Paneles_Admin.pnl_Claves;
 import Paneles_coach.pnl_AltaClase;
+import Paneles_coach.pnl_AltaTabla;
 import Paneles_coach.pnl_Clases;
+import Paneles_coach.pnl_Ejercicios;
 import Paneles_coach.pnl_Home_Coach;
 import Paneles_coach.pnl_Horario;
+import Paneles_coach.pnl_Rutinas;
+import Paneles_coach.pnl_VerClientes;
 import java.awt.Color;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,6 +41,7 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
     
     public Menu_coach_interfaz() {
         initComponents();
+        setTitle("Coach");
         setLocationRelativeTo(this);
         colorFondo=new Color(186,79,84);
         
@@ -44,6 +49,7 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
     
      public Menu_coach_interfaz(BufferedReader inSocket,PrintWriter outSocket, String nombreUsuario) {
         this.nombreUsuario = nombreUsuario;
+        setTitle("Coach-"+nombreUsuario);
         this.inSocket=inSocket;
          this.outSocket=outSocket;
         
@@ -83,7 +89,7 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
         rutinas_bt = new Recursos.RSButtonMetro();
         cerrarSession_bt = new Recursos.RSButtonMetro();
         clases_bt = new Recursos.RSButtonMetro();
-        clases_bt1 = new Recursos.RSButtonMetro();
+        rutinas_bt1 = new Recursos.RSButtonMetro();
         contenido_panel = new javax.swing.JPanel();
         contenidofake_lbl = new javax.swing.JLabel();
 
@@ -157,7 +163,7 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
         clientes_bt.setBackground(new java.awt.Color(74, 31, 61));
         clientes_bt.setForeground(new java.awt.Color(204, 204, 204));
         clientes_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_human_head_40px_2.png"))); // NOI18N
-        clientes_bt.setText("CLIENTES");
+        clientes_bt.setText("VER CLIENTES");
         clientes_bt.setColorHover(new java.awt.Color(112, 62, 97));
         clientes_bt.setColorNormal(new java.awt.Color(74, 31, 61));
         clientes_bt.setColorTextHover(new java.awt.Color(204, 204, 204));
@@ -193,8 +199,8 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
 
         rutinas_bt.setBackground(new java.awt.Color(74, 31, 61));
         rutinas_bt.setForeground(new java.awt.Color(204, 204, 204));
-        rutinas_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_treadmill_40px_2.png"))); // NOI18N
-        rutinas_bt.setText("RUTINAS");
+        rutinas_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_timetable_40px.png"))); // NOI18N
+        rutinas_bt.setText("CREAR TABLAS");
         rutinas_bt.setColorHover(new java.awt.Color(112, 62, 97));
         rutinas_bt.setColorNormal(new java.awt.Color(74, 31, 61));
         rutinas_bt.setColorTextHover(new java.awt.Color(204, 204, 204));
@@ -247,22 +253,22 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
             }
         });
 
-        clases_bt1.setBackground(new java.awt.Color(74, 31, 61));
-        clases_bt1.setForeground(new java.awt.Color(204, 204, 204));
-        clases_bt1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_calendar_40px.png"))); // NOI18N
-        clases_bt1.setText("HORARIOS");
-        clases_bt1.setColorHover(new java.awt.Color(112, 62, 97));
-        clases_bt1.setColorNormal(new java.awt.Color(74, 31, 61));
-        clases_bt1.setColorTextHover(new java.awt.Color(204, 204, 204));
-        clases_bt1.setColorTextNormal(new java.awt.Color(204, 204, 204));
-        clases_bt1.setColorTextPressed(new java.awt.Color(204, 204, 204));
-        clases_bt1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        clases_bt1.setHideActionText(true);
-        clases_bt1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        clases_bt1.setIconTextGap(12);
-        clases_bt1.addActionListener(new java.awt.event.ActionListener() {
+        rutinas_bt1.setBackground(new java.awt.Color(74, 31, 61));
+        rutinas_bt1.setForeground(new java.awt.Color(204, 204, 204));
+        rutinas_bt1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_treadmill_40px_2.png"))); // NOI18N
+        rutinas_bt1.setText("RUTINAS");
+        rutinas_bt1.setColorHover(new java.awt.Color(112, 62, 97));
+        rutinas_bt1.setColorNormal(new java.awt.Color(74, 31, 61));
+        rutinas_bt1.setColorTextHover(new java.awt.Color(204, 204, 204));
+        rutinas_bt1.setColorTextNormal(new java.awt.Color(204, 204, 204));
+        rutinas_bt1.setColorTextPressed(new java.awt.Color(204, 204, 204));
+        rutinas_bt1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        rutinas_bt1.setHideActionText(true);
+        rutinas_bt1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        rutinas_bt1.setIconTextGap(12);
+        rutinas_bt1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clases_bt1ActionPerformed(evt);
+                rutinas_bt1ActionPerformed(evt);
             }
         });
 
@@ -274,14 +280,14 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
             .addComponent(nombreUsuario_lb, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(cerrarSession_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(menu_panelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu_panelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rutinas_bt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(rutinas_bt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(clases_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ejercicios_bt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(clases_bt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(clientes_bt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(rutinas_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ejercicios_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clientes_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         menu_panelLayout.setVerticalGroup(
@@ -302,7 +308,7 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(clases_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(clases_bt1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(rutinas_bt1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 310, Short.MAX_VALUE)
                 .addComponent(cerrarSession_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -352,15 +358,15 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_mouseClickedCerrar
 
     private void ejercicios_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ejercicios_btActionPerformed
-        // TODO add your handling code here:
+        cambiarPanelContenido( new pnl_Ejercicios(this,inSocket,outSocket));
     }//GEN-LAST:event_ejercicios_btActionPerformed
 
     private void clientes_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clientes_btActionPerformed
-        // TODO add your handling code here:
+        cambiarPanelContenido( new pnl_VerClientes(this,inSocket,outSocket));
     }//GEN-LAST:event_clientes_btActionPerformed
 
     private void rutinas_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rutinas_btActionPerformed
-        // TODO add your handling code here:
+        cambiarPanelContenido( new pnl_AltaTabla(this,inSocket,outSocket));
     }//GEN-LAST:event_rutinas_btActionPerformed
 
     private void cerrarSession_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarSession_btActionPerformed
@@ -390,12 +396,8 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_cambiarTema
 
     private void home_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_home_btActionPerformed
-        // TODO add your handling code here:
+         cambiarPanelContenido( new pnl_VerClientes(this,inSocket,outSocket));
     }//GEN-LAST:event_home_btActionPerformed
-
-    private void clases_bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clases_bt1ActionPerformed
-        cambiarPanelContenido( new pnl_Horario(this,inSocket,outSocket));
-    }//GEN-LAST:event_clases_bt1ActionPerformed
 
     private void contenido_panelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contenido_panelMouseClicked
         //esconderMenu();
@@ -405,6 +407,10 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
     private void contenido_panelMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_contenido_panelMouseEntered
         //esconderMenu();
     }//GEN-LAST:event_contenido_panelMouseEntered
+
+    private void rutinas_bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rutinas_bt1ActionPerformed
+         cambiarPanelContenido( new pnl_Rutinas(this,inSocket,outSocket));
+    }//GEN-LAST:event_rutinas_bt1ActionPerformed
 
     /* ACCIONES DE MENU DEPLEGABLE (desactivado)
     //
@@ -461,7 +467,6 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
     private javax.swing.JPanel barra_panel;
     private Recursos.RSButtonMetro cerrarSession_bt;
     private Recursos.RSButtonMetro clases_bt;
-    private Recursos.RSButtonMetro clases_bt1;
     private Recursos.RSButtonMetro clientes_bt;
     private javax.swing.JPanel contenido_panel;
     private javax.swing.JLabel contenidofake_lbl;
@@ -474,6 +479,7 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
     private javax.swing.JLabel nombreUsuario_lb;
     private Recursos.RSButtonMetro rSButtonMetro1;
     private Recursos.RSButtonMetro rutinas_bt;
+    private Recursos.RSButtonMetro rutinas_bt1;
     private Recursos.RSButtonMetro tema_bt;
     // End of variables declaration//GEN-END:variables
 

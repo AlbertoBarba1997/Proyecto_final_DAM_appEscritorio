@@ -12,15 +12,18 @@ import java.awt.Image;
 import java.awt.font.TextAttribute;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -63,6 +66,14 @@ public class Utilidades {
                         System.arraycopy(bytesImagen, 0, imagenTotal, imagenTotalAnterior.length, nBytesImagen);
 
                         imagenTotalAnterior = imagenTotal;
+   
+                        if (nBytesImagenTotales == 1) {
+                            //Si llega un solo byte -1 de primeras es por que no llega bien la imagen, por lo que carga la imagen default y sale por que la imagen con esa ruta no existe en el servidor (ya).  
+                            cargarImagenNoDisponible(imagen_lbl1, anchura, altura);
+                            return;
+                        }
+
+                        //65536 son los maximo de bytes que caben en cada paquete del flujo, por lo que cuando son 65536 exactos significa que quedan mas paquetes de bytes de esa imagen, por lo que siguie leyendo, si es menos corta por que ya es el ultimo paquete.
                         if (nBytesImagen < 65536) {
                             break;
                         }
@@ -71,7 +82,7 @@ public class Utilidades {
 
                     ByteArrayInputStream bais = new ByteArrayInputStream(imagenTotal);
                     BufferedImage img = ImageIO.read(bais);
-                    System.out.println(img);
+                    //System.out.println(img);
 
                     BufferedImage resizedImage = resizeImage(img, anchura, altura);
                     imagen_lbl1.setIcon(new ImageIcon(resizedImage));
@@ -100,14 +111,14 @@ public class Utilidades {
 
         char[] caracteres = theInput.toCharArray();
         String parametro = "";
-        boolean comenzo=false;
-        
+        boolean comenzo = false;
+
         for (char c : caracteres) {
-            
-            if (c == ':'&& comenzo==false) {
+
+            if (c == ':' && comenzo == false) {
                 nParametro++;
-                comenzo=true;
-                
+                comenzo = true;
+
             } else if (c == ',') {
                 nParametro++;
             } else if (nParametro == nParametroBuscado) {
@@ -165,18 +176,20 @@ public class Utilidades {
         return atributosCliente;
 
     }
-    
+
     public static String[] obtenerHorario(String parametroCliente) {
-        String[] atributosHorario = new String[4];
+        String[] atributosHorario = new String[5];
         final String separador = "&";
         atributosHorario[0] = obtenerAtributo(parametroCliente, 0, separador);  //id
         atributosHorario[1] = obtenerAtributo(parametroCliente, 1, separador);  //dia
         atributosHorario[2] = obtenerAtributo(parametroCliente, 2, separador);  //hora
         atributosHorario[3] = obtenerAtributo(parametroCliente, 3, separador);  //nombreClase
-
+        atributosHorario[4] = obtenerAtributo(parametroCliente, 4, separador);  //nombreEntrenador
+        System.out.println(atributosHorario[4]);
         return atributosHorario;
 
     }
+
     public static String[] obtenerEntrenadores(String parametroCliente) {
         String[] atributosEntrenador = new String[4];
         final String separador = "&";
@@ -187,14 +200,31 @@ public class Utilidades {
         return atributosEntrenador;
 
     }
+
     public static String[] obtenerClase(String parametroCliente) {
         String[] atributosClase = new String[4];
         final String separador = "&";
         atributosClase[0] = obtenerAtributo(parametroCliente, 0, separador);  //id
         atributosClase[1] = obtenerAtributo(parametroCliente, 1, separador);  //nombre
-        
+
         return atributosClase;
 
+    }
+
+    public static Object[] obtenerEjercicio(String parametroEjercicio) {
+
+        Object[] atributosEjercicio = new Object[7];
+        final String separador = "&";
+
+        atributosEjercicio[0] = obtenerAtributo(parametroEjercicio, 1, separador);                      //nombre
+        atributosEjercicio[1] = obtenerAtributo(parametroEjercicio, 2, separador);                      //descripcion
+        atributosEjercicio[2] = obtenerAtributo(parametroEjercicio, 3, separador).toUpperCase();         //tipo
+        atributosEjercicio[3] = obtenerAtributo(parametroEjercicio, 4, separador).toUpperCase().replace('@', ' ');                      //musculos
+        atributosEjercicio[4] = Integer.parseInt(obtenerAtributo(parametroEjercicio, 0, separador));     //id (Que en la tabla es la ultima columna invisible
+        atributosEjercicio[5] = obtenerAtributo(parametroEjercicio, 5, separador);                      //ruta img servidor
+        atributosEjercicio[6] = obtenerAtributo(parametroEjercicio, 6, separador);                      //url video
+
+        return atributosEjercicio;
     }
 
     public static Object[] obtenerDatosCliente(String parametroCliente, String separador) {
@@ -290,4 +320,44 @@ public class Utilidades {
         return output;
     }
 
+    public static void cargarImagenNoDisponible(JLabel labelSalida, int anchura_img, int altura_img) {
+
+        try {
+            File imagenNoDisponible = new File("./src/Recursos/noImage.jpg");
+            byte[] imagenTotal = Files.readAllBytes(imagenNoDisponible.toPath());
+            ByteArrayInputStream bais = new ByteArrayInputStream(imagenTotal);
+            BufferedImage img = ImageIO.read(bais);
+            //System.out.println(img);
+            BufferedImage resizedImage = Utilidades.resizeImage(img, anchura_img, altura_img);
+            labelSalida.setIcon(new ImageIcon(resizedImage));
+
+        } catch (IOException ex) {
+
+        }
+
+    }
+    
+    public static boolean comprobarComa(String... textos){
+        boolean contieneComa=false;
+        for(String texto:textos){
+            if(texto.contains(",")){
+                JOptionPane.showMessageDialog(null, "El texto \""+texto+"\" no puede contener comas.");
+                contieneComa=true;
+            }
+        }
+        return contieneComa;
+    }
+    
+    public static String remplazarComaPorArroba(String texto){
+        texto.replace(',', '@');
+        return texto;
+    }
+    
+    public static String remplazarArrobaPorComa(String texto){
+        texto.replace('@', ',');
+        return texto;
+    }
+    
+    
+    
 }

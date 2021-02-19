@@ -82,9 +82,9 @@ create table HORARIO(
 //El UNIQUE lo interpreta como prymary key tmbn, sin UNIQUE no furunda
 
 create table EJERCICIO(
-	id INT NOT NULL auto_increment,
+	id INT NOT NULL auto_increment UNIQUE,
 	nombre VARCHAR(40) UNIQUE,
-	descripcion VARCHAR(80),
+	descripcion VARCHAR(200),
 	tipo VARCHAR(20),
 	rutaImg VARCHAR(80),
 	rutaVideo VARCHAR(80),
@@ -94,7 +94,7 @@ create table EJERCICIO(
 );
 
 create table MUSCULO(
-	id INT NOT NULL auto_increment,
+	id INT NOT NULL auto_increment UNIQUE,
 	nombre VARCHAR(40) UNIQUE,
 
 	PRIMARY KEY (id)
@@ -105,8 +105,46 @@ create table EJERCICIO_MUSCULO_MTM(
 	id_musculo INT not null,
 
 	PRIMARY KEY(id_ejercicio,id_musculo),
-	FOREIGN KEY (id_ejercicio) REFERENCES EJERCICIO(id), 
-    FOREIGN KEY (id_musculo) REFERENCES MUSCULO(id)	
+	FOREIGN KEY (id_ejercicio) REFERENCES EJERCICIO(id) ON DELETE CASCADE, 
+    FOREIGN KEY (id_musculo) REFERENCES MUSCULO(id) ON DELETE CASCADE	
+
+);
+
+
+
+// Consulta para filtrar por 3 campos: SELECT e.id, e.nombre, e.descripcion, e.tipo, e.rutaImg, e.rutaVideo from ejercicio e INNER JOIN ejercicio_musculo_mtm em ON e.id=em.id_ejercicio INNER JOIN musculo m ON m.id=em.id_musculo WHERE m.nombre LIKE '%espalda%'AND e.tipo LIKE '%%' AND e.nombre LIKE '%dominada%' GROUP BY e.nombre;
+
+
+create table EJ_TABLA_MTM(
+	id_ejercicio INT not null,
+	id_tabla INT not null,
+	dia INT not null,
+	series INT DEFAULT 0,
+	repeticiones INT DEFAULT 0,
+	tiempo VARCHAR(10) DEFAULT "",
+
+	PRIMARY KEY(id_ejercicio,id_tabla),
+	FOREIGN KEY (id_ejercicio) REFERENCES EJERCICIO(id) ON DELETE CASCADE, 
+    FOREIGN KEY (id_tabla) REFERENCES TABLA(id) ON DELETE CASCADE	
+
+);
+
+create table TABLA(
+	id INT not null auto_increment UNIQUE,
+	nombre VARCHAR(25) DEFAULT "",
+	dias INT not null,
+	tabla_base boolean DEFAULT false,
+	PRIMARY KEY(id)
+
+);
+
+create table TABLA_USUARIO_MTM(
+	id_tabla INT not null,
+	id_usuario INT not null,
+
+	PRIMARY KEY(id_tabla,id_usuario),
+	FOREIGN KEY (id_tabla) REFERENCES TABLA(id) ON DELETE CASCADE, 
+    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id) ON DELETE CASCADE	
 
 );
 
@@ -114,7 +152,19 @@ create table EJERCICIO_MUSCULO_MTM(
 
 
 
+//Registar ejercicios con musculos mtm 
+INSERT INTO ejercicio (nombre,descripcion,tipo, rutaImg, rutaVideo) VALUES ('Press de Banca', 'Levantar una barra con peso tumbado horizontalmente en un banco', 'musculacion', '','');
+Select id From ejercicio where nombre='press de banca';
+//(Con todos los musculos:
+SELECT id FROM musculo WHERE nombre='pecho';
+insert into ejercicio_musculo_mtm (id_ejercicio,id_musculo) VALUES (8,4)
 
+
+//Mismo pero con tablas y ejercicios
+
+INSERT INTO tabla(nombre, dias, tabla_Base) VALUES ('Full body', 3, true);
+Select id From tabla where nombre='full body';
+insert into ej_tabla_mtm (id_ejercicio,id_tabla, dia,series, repeticiones,tiempo) VALUES (1,0,1,3,8,'8 minutos')
 
 
 

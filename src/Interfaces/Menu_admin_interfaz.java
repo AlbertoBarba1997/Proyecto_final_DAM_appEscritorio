@@ -10,6 +10,8 @@ import Paneles_Admin.pnl_Claves;
 import Paneles_Admin.pnl_Clientes;
 import Paneles_Admin.pnl_Home_Adm;
 import Paneles_Admin.pnl_Trabajadores;
+import Paneles_coach.pnl_Clases;
+import Paneles_coach.pnl_Horario;
 
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -39,12 +41,14 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
     
         initComponents();
         setLocationRelativeTo(this);
+        setTitle("Menu Administrador");
         colorFondo = new Color(186, 79, 84);
 
     }
     
      public Menu_admin_interfaz(BufferedReader inSocket, PrintWriter outSocket, String nombreUsuario) {
          this.nombreUsuario = nombreUsuario;
+         setTitle("Administrador-"+nombreUsuario);
          this.inSocket=inSocket;
          this.outSocket=outSocket;
          colorFondo = new Color(186, 79, 84);
@@ -81,6 +85,8 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
         trabajadores_bt = new Recursos.RSButtonMetro();
         clavesAcceso_bt = new Recursos.RSButtonMetro();
         cerrarSession_bt = new Recursos.RSButtonMetro();
+        clases_bt1 = new Recursos.RSButtonMetro();
+        clases_bt = new Recursos.RSButtonMetro();
         contenido_panel = new javax.swing.JPanel();
         contenidofake_lbl = new javax.swing.JLabel();
 
@@ -241,6 +247,44 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
             }
         });
 
+        clases_bt1.setBackground(new java.awt.Color(74, 31, 61));
+        clases_bt1.setForeground(new java.awt.Color(204, 204, 204));
+        clases_bt1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_calendar_40px.png"))); // NOI18N
+        clases_bt1.setText("HORARIOS");
+        clases_bt1.setColorHover(new java.awt.Color(112, 62, 97));
+        clases_bt1.setColorNormal(new java.awt.Color(74, 31, 61));
+        clases_bt1.setColorTextHover(new java.awt.Color(204, 204, 204));
+        clases_bt1.setColorTextNormal(new java.awt.Color(204, 204, 204));
+        clases_bt1.setColorTextPressed(new java.awt.Color(204, 204, 204));
+        clases_bt1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        clases_bt1.setHideActionText(true);
+        clases_bt1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        clases_bt1.setIconTextGap(12);
+        clases_bt1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clases_bt1ActionPerformed(evt);
+            }
+        });
+
+        clases_bt.setBackground(new java.awt.Color(74, 31, 61));
+        clases_bt.setForeground(new java.awt.Color(204, 204, 204));
+        clases_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_dancing_40px_1.png"))); // NOI18N
+        clases_bt.setText("CLASES");
+        clases_bt.setColorHover(new java.awt.Color(112, 62, 97));
+        clases_bt.setColorNormal(new java.awt.Color(74, 31, 61));
+        clases_bt.setColorTextHover(new java.awt.Color(204, 204, 204));
+        clases_bt.setColorTextNormal(new java.awt.Color(204, 204, 204));
+        clases_bt.setColorTextPressed(new java.awt.Color(204, 204, 204));
+        clases_bt.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        clases_bt.setHideActionText(true);
+        clases_bt.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        clases_bt.setIconTextGap(12);
+        clases_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clases_btActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menu_panelLayout = new javax.swing.GroupLayout(menu_panel);
         menu_panel.setLayout(menu_panelLayout);
         menu_panelLayout.setHorizontalGroup(
@@ -252,6 +296,12 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
             .addComponent(nombreUsuario_lb, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(clavesAcceso_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu_panelLayout.createSequentialGroup()
+                .addGap(0, 0, 0)
+                .addGroup(menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(clases_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(clases_bt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         menu_panelLayout.setVerticalGroup(
             menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,7 +318,11 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
                 .addComponent(clientes_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(clavesAcceso_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 394, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(clases_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(clases_bt1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
                 .addComponent(cerrarSession_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -374,6 +428,15 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
     private void clavesAcceso_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clavesAcceso_btActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_clavesAcceso_btActionPerformed
+
+    private void clases_bt1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clases_bt1ActionPerformed
+        cambiarPanelContenido( new pnl_Horario(this,inSocket,outSocket));
+    }//GEN-LAST:event_clases_bt1ActionPerformed
+
+    private void clases_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clases_btActionPerformed
+
+        cambiarPanelContenido( new pnl_Clases(this,inSocket,outSocket));
+    }//GEN-LAST:event_clases_btActionPerformed
    
     
     
@@ -452,6 +515,8 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barra_panel;
     private Recursos.RSButtonMetro cerrarSession_bt;
+    private Recursos.RSButtonMetro clases_bt;
+    private Recursos.RSButtonMetro clases_bt1;
     private Recursos.RSButtonMetro clavesAcceso_bt;
     private Recursos.RSButtonMetro clientes_bt;
     private javax.swing.JPanel contenido_panel;

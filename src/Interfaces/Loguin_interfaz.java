@@ -420,23 +420,20 @@ public class Loguin_interfaz extends javax.swing.JFrame {
             outputSocket.println("C4-LOG_TRABAJADOR:" + dni + "," + clave);
             outputSocket.flush();
             String mensajeEntrada = inputSocket.readLine();
-            
-            if(mensajeEntrada.contains("S2-LOG_INCORRECTO")){
-                resultado=-1;
-            }else if(mensajeEntrada.contains("S10-LOG_CORRECTO_TR")){
-                String rol=Utilidades.obtenerParametro(mensajeEntrada, 1);
-                String nombre=Utilidades.obtenerParametro(mensajeEntrada, 2);
-                String apellidos=Utilidades.obtenerParametro(mensajeEntrada, 3);
-                this.nombreUsuario=nombre+" "+apellidos;
-                resultado=Integer.parseInt(rol);
-                
-                
+
+            if (mensajeEntrada.contains("S2-LOG_INCORRECTO")) {
+                resultado = -1;
+            } else if (mensajeEntrada.contains("S10-LOG_CORRECTO_TR")) {
+                String rol = Utilidades.obtenerParametro(mensajeEntrada, 1);
+                String nombre = Utilidades.obtenerParametro(mensajeEntrada, 2);
+                String apellidos = Utilidades.obtenerParametro(mensajeEntrada, 3);
+                this.nombreUsuario = nombre + " " + apellidos;
+                resultado = Integer.parseInt(rol);
+
             }
-            
-            
-            
+
         } catch (IOException ioe) {
-            
+
         }
 
         return resultado;

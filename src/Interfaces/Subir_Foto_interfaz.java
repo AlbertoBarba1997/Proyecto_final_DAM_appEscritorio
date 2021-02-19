@@ -7,7 +7,7 @@ package Interfaces;
 
 import Paneles_Admin.pnl_AltaCliente;
 import Paneles_coach.pnl_AltaClase;
-import Paneles_coach.pnl_AltaEjercicio;
+import Paneles_coach.pnl_Ejercicios;
 import Util.Utilidades;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
@@ -23,6 +23,7 @@ import java.nio.file.Files;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.activation.MimetypesFileTypeMap;
+import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -35,28 +36,39 @@ public class Subir_Foto_interfaz extends javax.swing.JFrame {
 
     pnl_AltaCliente panelPadreCliente;
     pnl_AltaClase panelPadreClase;
-    pnl_AltaEjercicio panelPadreEjercicio;
+    pnl_Ejercicios panelPadreEjercicio;
 
+    JButton botonPadre;
+    
     int nEjercicio;
 
     public Subir_Foto_interfaz() {
         initComponents();
+        setTitle("Subir imagen");
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     }
 
     public Subir_Foto_interfaz(pnl_AltaCliente panelPadre) {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setTitle("Subir imagen");
         this.panelPadreCliente = panelPadre;
         nEjercicio = 1;
+       
     }
 
     public Subir_Foto_interfaz(pnl_AltaClase panelPadre) {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setTitle("Subir imagen");
         this.panelPadreClase = panelPadre;
         nEjercicio = 2;
     }
 
-    public Subir_Foto_interfaz(pnl_AltaEjercicio panelPadre) {
+    public Subir_Foto_interfaz(pnl_Ejercicios panelPadre) {
         initComponents();
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setTitle("Subir imagen");
         this.panelPadreEjercicio = panelPadre;
         nEjercicio = 3;
     }
@@ -70,16 +82,30 @@ public class Subir_Foto_interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         ruta_tf = new javax.swing.JTextField();
         selectorRuta_bt = new javax.swing.JButton();
         subir_bt = new javax.swing.JButton();
         error_lb = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        rSButtonMetro1 = new Recursos.RSButtonMetro();
+        rSButtonMetro2 = new Recursos.RSButtonMetro();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 234));
+        setUndecorated(true);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 234));
 
         ruta_tf.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        ruta_tf.setForeground(new java.awt.Color(0, 0, 0));
+        ruta_tf.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        ruta_tf.setOpaque(false);
 
+        selectorRuta_bt.setBackground(new java.awt.Color(74, 31, 61));
         selectorRuta_bt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        selectorRuta_bt.setForeground(new java.awt.Color(255, 255, 255));
         selectorRuta_bt.setText("...");
         selectorRuta_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,8 +113,11 @@ public class Subir_Foto_interfaz extends javax.swing.JFrame {
             }
         });
 
+        subir_bt.setBackground(new java.awt.Color(74, 31, 61));
         subir_bt.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        subir_bt.setText("SUBIR IMAGEN");
+        subir_bt.setForeground(new java.awt.Color(255, 255, 255));
+        subir_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_save_30px.png"))); // NOI18N
+        subir_bt.setText(" SUBIR IMAGEN");
         subir_bt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 subir_btActionPerformed(evt);
@@ -96,39 +125,109 @@ public class Subir_Foto_interfaz extends javax.swing.JFrame {
         });
 
         error_lb.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        error_lb.setForeground(new java.awt.Color(204, 0, 51));
+        error_lb.setForeground(new java.awt.Color(255, 51, 51));
         error_lb.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+
+        jPanel2.setBackground(new java.awt.Color(74, 31, 61));
+
+        rSButtonMetro1.setBackground(new java.awt.Color(74, 31, 61));
+        rSButtonMetro1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_subtract_40px.png"))); // NOI18N
+        rSButtonMetro1.setColorHover(new java.awt.Color(112, 62, 97));
+        rSButtonMetro1.setColorNormal(new java.awt.Color(74, 31, 61));
+        rSButtonMetro1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rSButtonMetro1mouseClickedCerrar(evt);
+            }
+        });
+        rSButtonMetro1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro1ActionPerformed(evt);
+            }
+        });
+
+        rSButtonMetro2.setBackground(new java.awt.Color(74, 31, 61));
+        rSButtonMetro2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_multiply_40px_1.png"))); // NOI18N
+        rSButtonMetro2.setColorHover(new java.awt.Color(112, 62, 97));
+        rSButtonMetro2.setColorNormal(new java.awt.Color(74, 31, 61));
+        rSButtonMetro2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                rSButtonMetro2mouseClickedCerrar(evt);
+            }
+        });
+        rSButtonMetro2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rSButtonMetro2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(rSButtonMetro1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(rSButtonMetro2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jLabel1.setFont(new java.awt.Font("Leelawadee UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(74, 31, 61));
+        jLabel1.setText("SUBIR IMAGEN");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(210, 210, 210)
+                .addComponent(subir_bt)
+                .addGap(0, 215, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(error_lb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(ruta_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(selectorRuta_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(selectorRuta_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ruta_tf))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(error_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(subir_bt)
+                .addGap(28, 28, 28))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(229, 229, 229)
-                        .addComponent(subir_bt))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(error_lb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(ruta_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
-                        .addGap(18, 18, 18)
-                        .addComponent(selectorRuta_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(27, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(61, 61, 61)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ruta_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(selectorRuta_bt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(error_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
-                .addComponent(subir_bt)
-                .addGap(19, 19, 19))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -162,14 +261,31 @@ public class Subir_Foto_interfaz extends javax.swing.JFrame {
             String type = mimetype.split("/")[0];
             if (type.equals("image")) {
                 subirFotoServidor(foto);
+                error_lb.setText("");
             } else {
-                error_lb.setText("El archivo indicado no es una imagen (png o jpg)");
+                error_lb.setText("El archivo indicado no es una imagen (jpg)");
             }
 
         } else {
             error_lb.setText("El archivo indicado no existe. Vuelva a indicar la ruta.");
         }
     }//GEN-LAST:event_subir_btActionPerformed
+
+    private void rSButtonMetro1mouseClickedCerrar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSButtonMetro1mouseClickedCerrar
+        setState(ICONIFIED);
+    }//GEN-LAST:event_rSButtonMetro1mouseClickedCerrar
+
+    private void rSButtonMetro1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonMetro1ActionPerformed
+
+    private void rSButtonMetro2mouseClickedCerrar(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_rSButtonMetro2mouseClickedCerrar
+       dispose();
+    }//GEN-LAST:event_rSButtonMetro2mouseClickedCerrar
+
+    private void rSButtonMetro2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rSButtonMetro2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_rSButtonMetro2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -208,6 +324,11 @@ public class Subir_Foto_interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel error_lb;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private Recursos.RSButtonMetro rSButtonMetro1;
+    private Recursos.RSButtonMetro rSButtonMetro2;
     private javax.swing.JTextField ruta_tf;
     private javax.swing.JButton selectorRuta_bt;
     private javax.swing.JButton subir_bt;

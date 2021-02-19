@@ -161,14 +161,14 @@
                   <Component id="nombreUsuario_lb" alignment="0" pref="260" max="32767" attributes="0"/>
                   <Component id="jLabel2" alignment="0" max="32767" attributes="0"/>
                   <Component id="cerrarSession_bt" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="rutinas_bt" alignment="1" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="rutinas_bt1" max="32767" attributes="0"/>
                           <Component id="clases_bt" max="32767" attributes="0"/>
-                          <Component id="ejercicios_bt" alignment="1" max="32767" attributes="0"/>
-                          <Component id="clases_bt1" alignment="0" max="32767" attributes="0"/>
-                          <Component id="clientes_bt" alignment="1" max="32767" attributes="0"/>
+                          <Component id="rutinas_bt" max="32767" attributes="0"/>
+                          <Component id="ejercicios_bt" max="32767" attributes="0"/>
+                          <Component id="clientes_bt" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -192,7 +192,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="clases_bt" min="-2" pref="44" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="clases_bt1" min="-2" pref="44" max="-2" attributes="0"/>
+                      <Component id="rutinas_bt1" min="-2" pref="44" max="-2" attributes="0"/>
                       <EmptySpace pref="310" max="32767" attributes="0"/>
                       <Component id="cerrarSession_bt" min="-2" pref="44" max="-2" attributes="0"/>
                   </Group>
@@ -244,7 +244,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Recursos/icons8_human_head_40px_2.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="CLIENTES"/>
+                <Property name="text" type="java.lang.String" value="VER CLIENTES"/>
                 <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="61" green="3e" red="70" type="rgb"/>
                 </Property>
@@ -315,9 +315,9 @@
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Recursos/icons8_treadmill_40px_2.png"/>
+                  <Image iconType="3" name="/Recursos/icons8_timetable_40px.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="RUTINAS"/>
+                <Property name="text" type="java.lang.String" value="CREAR TABLAS"/>
                 <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="61" green="3e" red="70" type="rgb"/>
                 </Property>
@@ -417,7 +417,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clases_btActionPerformed"/>
               </Events>
             </Component>
-            <Component class="Recursos.RSButtonMetro" name="clases_bt1">
+            <Component class="Recursos.RSButtonMetro" name="rutinas_bt1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="3d" green="1f" red="4a" type="rgb"/>
@@ -426,9 +426,9 @@
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Recursos/icons8_calendar_40px.png"/>
+                  <Image iconType="3" name="/Recursos/icons8_treadmill_40px_2.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="HORARIOS"/>
+                <Property name="text" type="java.lang.String" value="RUTINAS"/>
                 <Property name="colorHover" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="61" green="3e" red="70" type="rgb"/>
                 </Property>
@@ -452,7 +452,7 @@
                 <Property name="iconTextGap" type="int" value="12"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clases_bt1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rutinas_bt1ActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
