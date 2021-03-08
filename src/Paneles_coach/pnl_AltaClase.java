@@ -296,7 +296,11 @@ public class pnl_AltaClase extends javax.swing.JPanel {
     }//GEN-LAST:event_home_btActionPerformed
 
     private void home_btMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_home_btMouseClicked
-        interfaz_menu_padre.cambiarPanelContenido(new pnl_Clases(interfaz_menu_padre, inSocket, outSocket));
+        if(interfaz_menu_padre!=null){
+            interfaz_menu_padre.cambiarPanelContenido(new pnl_Clases(interfaz_menu_padre, inSocket, outSocket));
+        }else{
+            interfaz_menu_padre_admin.cambiarPanelContenido(new pnl_Clases(interfaz_menu_padre_admin, inSocket, outSocket));
+        }
         
     }//GEN-LAST:event_home_btMouseClicked
 

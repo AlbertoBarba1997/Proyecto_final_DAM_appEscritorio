@@ -8,6 +8,7 @@ package Paneles_coach;
 import Paneles_Admin.*;
 import Interfaces.Menu_admin_interfaz;
 import Interfaces.Menu_coach_interfaz;
+import Modelo.Ejercicio;
 import Util.Utilidades;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -23,6 +24,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
@@ -31,6 +33,7 @@ import javax.imageio.ImageIO;
 import static javax.swing.BorderFactory.createEmptyBorder;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.table.DefaultTableModel;
 
@@ -44,12 +47,28 @@ public class pnl_Rutinas extends javax.swing.JPanel {
     BufferedReader inSocket;
     PrintWriter outSocket;
 
-    DefaultTableModel defaultTableMode;
+    DefaultTableModel defaultTableMode_Clientes;
+    DefaultTableModel defaultTableMode_Tablas;
+    DefaultTableModel defaultTableMode_Ejercicios;
 
     int filtradoRolAnterior;
+
+    String dniSeleccionado = null;
+    String rutaFotoSeleccionada = null;
+    String dniClienteSeleccionado=null;
     
-    String dniSeleccionado=null;
-    String rutaFotoSeleccionada=null;
+    //LISTAS EJERCICIOS
+    //LISTAS DE EJERCICIOS
+    ArrayList<Ejercicio> ejerciciosDia1;
+    ArrayList<Ejercicio> ejerciciosDia2;
+    ArrayList<Ejercicio> ejerciciosDia3;
+    ArrayList<Ejercicio> ejerciciosDia4;
+    ArrayList<Ejercicio> ejerciciosDia5;
+    ArrayList<Ejercicio> ejerciciosDia6;
+    ArrayList<Ejercicio> ejerciciosDia7;
+    ArrayList<ArrayList<Ejercicio>> lDiasEjercicios;
+    
+    
 
     public pnl_Rutinas(Menu_coach_interfaz interfaz_menu_padre, BufferedReader inSocket, PrintWriter outSocket) {
         initComponents();
@@ -61,7 +80,9 @@ public class pnl_Rutinas extends javax.swing.JPanel {
         System.out.println(outSocket);
 
         darFormatoTabla();
-
+        
+        inicializarListasEjercicios();
+        
         cargarTablaClientes();
     }
 
@@ -75,27 +96,32 @@ public class pnl_Rutinas extends javax.swing.JPanel {
     private void initComponents() {
 
         titulo_lb = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
         eliminar_lb = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         patronBuscar_tf = new javax.swing.JTextField();
-        peso_lbl = new javax.swing.JLabel();
-        notas_lbl = new javax.swing.JLabel();
-        altura_lbl = new javax.swing.JLabel();
-        eliminar_lb1 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        nuevaPersonalizada_lb = new javax.swing.JLabel();
         titulo_lb2 = new javax.swing.JLabel();
         titulo_lb3 = new javax.swing.JLabel();
-        subirImg_bt = new javax.swing.JButton();
-        agregarEjercicio_bt1 = new javax.swing.JButton();
-        eliminarEjercicio_bt2 = new javax.swing.JButton();
-        eliminar_lb2 = new javax.swing.JLabel();
-        eliminar_lb3 = new javax.swing.JLabel();
+        tablasModelo_bt = new javax.swing.JButton();
+        asignarTablaCliente_bt = new javax.swing.JButton();
+        cargarTablasBliente_bt = new javax.swing.JButton();
+        nueva_lb = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        titulo_lb5 = new javax.swing.JLabel();
+        dia_cb = new javax.swing.JComboBox<>();
+        cargarEjercicios_bt = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1390, 850));
@@ -103,56 +129,6 @@ public class pnl_Rutinas extends javax.swing.JPanel {
         titulo_lb.setFont(new java.awt.Font("Ebrima", 1, 36)); // NOI18N
         titulo_lb.setForeground(new java.awt.Color(255, 255, 255));
         titulo_lb.setText("RUTINAS");
-
-        jScrollPane1.setBackground(new java.awt.Color(74, 31, 61));
-        jScrollPane1.setBorder(null);
-        jScrollPane1.setForeground(new java.awt.Color(74, 31, 61));
-        jScrollPane1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jScrollPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jScrollPane1MouseClicked(evt);
-            }
-        });
-
-        jTable1.setBackground(new java.awt.Color(222, 222, 222));
-        jTable1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
-        jTable1.setForeground(new java.awt.Color(0, 0, 0));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "DNI", "Nombre", "Apellido", "Correo"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jTable1.setOpaque(false);
-        jTable1.setRowHeight(38);
-        jTable1.setSelectionBackground(new java.awt.Color(101, 58, 88));
-        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable1MousePressed(evt);
-            }
-        });
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
-            jTable1.getColumnModel().getColumn(3).setMinWidth(0);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(0);
-            jTable1.getColumnModel().getColumn(3).setMaxWidth(0);
-            jTable1.getColumnModel().getColumn(3).setHeaderValue("Correo");
-        }
 
         eliminar_lb.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
         eliminar_lb.setForeground(new java.awt.Color(255, 255, 255));
@@ -212,44 +188,171 @@ public class pnl_Rutinas extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        peso_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        peso_lbl.setForeground(new java.awt.Color(255, 255, 255));
-        peso_lbl.setText(" ");
-
-        notas_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        notas_lbl.setForeground(new java.awt.Color(255, 255, 255));
-        notas_lbl.setText(" ");
-        notas_lbl.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        altura_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        altura_lbl.setForeground(new java.awt.Color(255, 255, 255));
-        altura_lbl.setText(" ");
-
-        eliminar_lb1.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
-        eliminar_lb1.setForeground(new java.awt.Color(255, 255, 255));
-        eliminar_lb1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_plus_30px.png"))); // NOI18N
-        eliminar_lb1.setText("Nueva rutina personalizada");
-        eliminar_lb1.addMouseListener(new java.awt.event.MouseAdapter() {
+        nuevaPersonalizada_lb.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
+        nuevaPersonalizada_lb.setForeground(new java.awt.Color(255, 255, 255));
+        nuevaPersonalizada_lb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_plus_30px.png"))); // NOI18N
+        nuevaPersonalizada_lb.setText("Nueva rutina personalizada");
+        nuevaPersonalizada_lb.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                eliminar_lb1MouseClicked(evt);
+                nuevaPersonalizada_lbMouseClicked(evt);
             }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
-                eliminar_lb1MouseEntered(evt);
+                nuevaPersonalizada_lbMouseEntered(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                eliminar_lb1MouseExited(evt);
+                nuevaPersonalizada_lbMouseExited(evt);
             }
         });
+
+        titulo_lb2.setFont(new java.awt.Font("Corbel Light", 1, 30)); // NOI18N
+        titulo_lb2.setForeground(new java.awt.Color(255, 255, 255));
+        titulo_lb2.setText("Tablas");
+
+        titulo_lb3.setFont(new java.awt.Font("Corbel Light", 1, 30)); // NOI18N
+        titulo_lb3.setForeground(new java.awt.Color(255, 255, 255));
+        titulo_lb3.setText("Clientes");
+
+        tablasModelo_bt.setBackground(new java.awt.Color(74, 31, 61));
+        tablasModelo_bt.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        tablasModelo_bt.setForeground(new java.awt.Color(255, 255, 255));
+        tablasModelo_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_refresh_25px.png"))); // NOI18N
+        tablasModelo_bt.setText("TABLAS MODELO");
+        tablasModelo_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tablasModelo_btActionPerformed(evt);
+            }
+        });
+
+        asignarTablaCliente_bt.setBackground(new java.awt.Color(74, 31, 61));
+        asignarTablaCliente_bt.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        asignarTablaCliente_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_right_25px.png"))); // NOI18N
+        asignarTablaCliente_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                asignarTablaCliente_btActionPerformed(evt);
+            }
+        });
+
+        cargarTablasBliente_bt.setBackground(new java.awt.Color(74, 31, 61));
+        cargarTablasBliente_bt.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        cargarTablasBliente_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_left_25px.png"))); // NOI18N
+        cargarTablasBliente_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarTablasBliente_btActionPerformed(evt);
+            }
+        });
+
+        nueva_lb.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
+        nueva_lb.setForeground(new java.awt.Color(255, 255, 255));
+        nueva_lb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_plus_30px.png"))); // NOI18N
+        nueva_lb.setText("Nueva");
+        nueva_lb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                nueva_lbMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                nueva_lbMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                nueva_lbMouseExited(evt);
+            }
+        });
+
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Cargar tablas del cliente");
+
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Asignar  tabla  a cliente");
+
+        titulo_lb5.setFont(new java.awt.Font("Corbel Light", 1, 30)); // NOI18N
+        titulo_lb5.setForeground(new java.awt.Color(255, 255, 255));
+        titulo_lb5.setText("Ejercicios");
+
+        dia_cb.setBackground(new java.awt.Color(74, 31, 61));
+        dia_cb.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        dia_cb.setForeground(new java.awt.Color(255, 255, 255));
+        dia_cb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dia 1" }));
+        dia_cb.setBorder(null);
+        dia_cb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dia_cbActionPerformed(evt);
+            }
+        });
+
+        cargarEjercicios_bt.setBackground(new java.awt.Color(74, 31, 61));
+        cargarEjercicios_bt.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
+        cargarEjercicios_bt.setIcon(new javax.swing.ImageIcon("C:\\Users\\juana\\AppData\\Local\\Temp\\icons8_down_25px_3.png")); // NOI18N
+        cargarEjercicios_bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarEjercicios_btActionPerformed(evt);
+            }
+        });
+
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Cargar ejercicios de tabla");
+
+        jPanel3.setBackground(new java.awt.Color(240, 239, 239));
+
+        jScrollPane3.setBackground(new java.awt.Color(74, 31, 61));
+        jScrollPane3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jScrollPane3.setForeground(new java.awt.Color(74, 31, 61));
+        jScrollPane3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        jTable3.setBackground(new java.awt.Color(222, 222, 222));
+        jTable3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jTable3.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        jTable3.setForeground(new java.awt.Color(0, 0, 0));
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "Ejercicio", "Series", "Reps", "Tiempo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable3.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable3.setOpaque(false);
+        jTable3.setRowHeight(38);
+        jTable3.setSelectionBackground(new java.awt.Color(101, 58, 88));
+        jTable3.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane3.setViewportView(jTable3);
+        if (jTable3.getColumnModel().getColumnCount() > 0) {
+            jTable3.getColumnModel().getColumn(0).setMinWidth(0);
+            jTable3.getColumnModel().getColumn(0).setPreferredWidth(0);
+            jTable3.getColumnModel().getColumn(0).setMaxWidth(0);
+            jTable3.getColumnModel().getColumn(2).setPreferredWidth(80);
+            jTable3.getColumnModel().getColumn(2).setMaxWidth(80);
+            jTable3.getColumnModel().getColumn(3).setPreferredWidth(80);
+            jTable3.getColumnModel().getColumn(3).setMaxWidth(80);
+            jTable3.getColumnModel().getColumn(4).setPreferredWidth(140);
+            jTable3.getColumnModel().getColumn(4).setMaxWidth(140);
+        }
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+
+        jPanel4.setBackground(new java.awt.Color(240, 239, 239));
+        jPanel4.setForeground(new java.awt.Color(204, 204, 204));
 
         jScrollPane2.setBackground(new java.awt.Color(74, 31, 61));
         jScrollPane2.setBorder(null);
         jScrollPane2.setForeground(new java.awt.Color(74, 31, 61));
         jScrollPane2.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
-        jScrollPane2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jScrollPane2MouseClicked(evt);
-            }
-        });
 
         jTable2.setBackground(new java.awt.Color(222, 222, 222));
         jTable2.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
@@ -265,9 +368,16 @@ public class pnl_Rutinas extends javax.swing.JPanel {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.Integer.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jTable2.setGridColor(new java.awt.Color(255, 255, 255));
@@ -275,82 +385,86 @@ public class pnl_Rutinas extends javax.swing.JPanel {
         jTable2.setRowHeight(38);
         jTable2.setSelectionBackground(new java.awt.Color(101, 58, 88));
         jTable2.setSelectionForeground(new java.awt.Color(255, 255, 255));
-        jTable2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                jTable2MousePressed(evt);
-            }
-        });
         jScrollPane2.setViewportView(jTable2);
         if (jTable2.getColumnModel().getColumnCount() > 0) {
-            jTable2.getColumnModel().getColumn(0).setPreferredWidth(100);
-            jTable2.getColumnModel().getColumn(1).setPreferredWidth(100);
-            jTable2.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTable2.getColumnModel().getColumn(0).setPreferredWidth(50);
+            jTable2.getColumnModel().getColumn(0).setMaxWidth(50);
+            jTable2.getColumnModel().getColumn(2).setPreferredWidth(90);
+            jTable2.getColumnModel().getColumn(2).setMaxWidth(90);
         }
 
-        titulo_lb2.setFont(new java.awt.Font("Corbel Light", 1, 30)); // NOI18N
-        titulo_lb2.setForeground(new java.awt.Color(255, 255, 255));
-        titulo_lb2.setText("Tablas");
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 513, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 260, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+        );
 
-        titulo_lb3.setFont(new java.awt.Font("Corbel Light", 1, 30)); // NOI18N
-        titulo_lb3.setForeground(new java.awt.Color(255, 255, 255));
-        titulo_lb3.setText("Clientes");
+        jPanel5.setBackground(new java.awt.Color(240, 239, 239));
 
-        subirImg_bt.setBackground(new java.awt.Color(74, 31, 61));
-        subirImg_bt.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
-        subirImg_bt.setForeground(new java.awt.Color(255, 255, 255));
-        subirImg_bt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_refresh_25px.png"))); // NOI18N
-        subirImg_bt.setText("TABLAS MODELO");
-        subirImg_bt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subirImg_btActionPerformed(evt);
+        jScrollPane1.setBackground(new java.awt.Color(74, 31, 61));
+        jScrollPane1.setBorder(null);
+        jScrollPane1.setForeground(new java.awt.Color(74, 31, 61));
+        jScrollPane1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+
+        jTable1.setBackground(new java.awt.Color(222, 222, 222));
+        jTable1.setFont(new java.awt.Font("Dialog", 0, 16)); // NOI18N
+        jTable1.setForeground(new java.awt.Color(0, 0, 0));
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "DNI", "Nombre", "Apellido", "Correo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
             }
         });
+        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
+        jTable1.setOpaque(false);
+        jTable1.setRowHeight(38);
+        jTable1.setSelectionBackground(new java.awt.Color(101, 58, 88));
+        jTable1.setSelectionForeground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(200);
+            jTable1.getColumnModel().getColumn(3).setMinWidth(0);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(0);
+            jTable1.getColumnModel().getColumn(3).setMaxWidth(0);
+        }
 
-        agregarEjercicio_bt1.setBackground(new java.awt.Color(74, 31, 61));
-        agregarEjercicio_bt1.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        agregarEjercicio_bt1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_right_25px.png"))); // NOI18N
-
-        eliminarEjercicio_bt2.setBackground(new java.awt.Color(74, 31, 61));
-        eliminarEjercicio_bt2.setFont(new java.awt.Font("Dialog", 1, 16)); // NOI18N
-        eliminarEjercicio_bt2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_left_25px.png"))); // NOI18N
-
-        eliminar_lb2.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
-        eliminar_lb2.setForeground(new java.awt.Color(255, 255, 255));
-        eliminar_lb2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_edit_25px_1.png"))); // NOI18N
-        eliminar_lb2.setText("Modificar");
-        eliminar_lb2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                eliminar_lb2MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                eliminar_lb2MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                eliminar_lb2MouseExited(evt);
-            }
-        });
-
-        eliminar_lb3.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
-        eliminar_lb3.setForeground(new java.awt.Color(255, 255, 255));
-        eliminar_lb3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_plus_30px.png"))); // NOI18N
-        eliminar_lb3.setText("Nueva");
-        eliminar_lb3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                eliminar_lb3MouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                eliminar_lb3MouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                eliminar_lb3MouseExited(evt);
-            }
-        });
-
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Cargar tablas del cliente");
-
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Asignar  tabla  a cliente");
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 513, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -359,102 +473,112 @@ public class pnl_Rutinas extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(305, 305, 305)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(peso_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(notas_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(altura_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(titulo_lb)))
+                        .addComponent(titulo_lb))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(420, 420, 420)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(titulo_lb5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(dia_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(150, 150, 150)
-                        .addComponent(eliminar_lb3)
-                        .addGap(34, 34, 34)
-                        .addComponent(eliminar_lb)
-                        .addGap(39, 39, 39)
-                        .addComponent(eliminar_lb2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(92, Short.MAX_VALUE)
+                        .addGap(84, 84, 84)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(titulo_lb2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(subirImg_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(239, 239, 239)
+                                .addComponent(tablasModelo_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(nueva_lb)
+                        .addGap(31, 31, 31)
+                        .addComponent(eliminar_lb)
+                        .addGap(169, 169, 169)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(cargarEjercicios_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(49, 49, 49))
+                        .addComponent(jLabel4))
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(asignarTablaCliente_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cargarTablasBliente_bt)))
+                    .addComponent(jLabel3))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(57, 57, 57)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(eliminarEjercicio_bt2)
-                                    .addComponent(agregarEjercicio_bt1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGap(14, 14, 14)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)))))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(titulo_lb3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(136, 136, 136)
-                        .addComponent(eliminar_lb1)))
-                .addGap(89, 89, 89))
+                                .addComponent(titulo_lb3)
+                                .addGap(165, 165, 165)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(120, 120, 120))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(nuevaPersonalizada_lb)
+                        .addGap(245, 245, 245))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(titulo_lb)
-                        .addGap(112, 112, 112))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(titulo_lb2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(subirImg_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(titulo_lb3))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(24, 24, 24)
+                                .addComponent(titulo_lb)
+                                .addGap(46, 46, 46)
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(56, 56, 56)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(asignarTablaCliente_bt)
+                                .addGap(18, 18, 18)
+                                .addComponent(cargarTablasBliente_bt)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(127, 127, 127)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(tablasModelo_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(titulo_lb3)))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addComponent(titulo_lb2)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nuevaPersonalizada_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(eliminar_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nueva_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(23, 23, 23)
-                        .addComponent(agregarEjercicio_bt1)
-                        .addGap(18, 18, 18)
-                        .addComponent(eliminarEjercicio_bt2)
-                        .addGap(23, 23, 23)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cargarEjercicios_bt)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(eliminar_lb1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(eliminar_lb2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(eliminar_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(eliminar_lb3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(208, 208, 208)
-                .addComponent(peso_lbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(altura_lbl)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(notas_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                    .addComponent(dia_cb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titulo_lb5))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -479,30 +603,6 @@ public class pnl_Rutinas extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_patronBuscar_tfKeyReleased
 
-    private void jScrollPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane1MouseClicked
-
-    }//GEN-LAST:event_jScrollPane1MouseClicked
-
-    private void jTable1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MousePressed
-        
-
-        //1 Mirar si hay seleccionado un cliente en la tabla
-        int filaSeleccionada = jTable1.getSelectedRow();
-
-        if (filaSeleccionada != -1) {
-
-            //2 Obtener el dni (1 columna) del cliente seleccionado
-            String dniSeleccionado = (String) jTable1.getValueAt(filaSeleccionada, 0);
-
-            //3 Mostrar la informacion del cliente seleccionado
-            mostrarDatosCliente(dniSeleccionado);
-
-        } else {
-            this.error_lbl.setText("Selecciona un trabajador primero.");
-        }
-        error_lbl.setText("");
-    }//GEN-LAST:event_jTable1MousePressed
-
     private void eliminar_lbMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lbMouseExited
         opcionFocusLost(evt);
     }//GEN-LAST:event_eliminar_lbMouseExited
@@ -512,99 +612,173 @@ public class pnl_Rutinas extends javax.swing.JPanel {
     }//GEN-LAST:event_eliminar_lbMouseEntered
 
     private void eliminar_lbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lbMouseClicked
-        //1 Mirar si hay seleccionado un trabajador en la tabla
-        int filaSeleccionada = jTable1.getSelectedRow();
-
-        if (filaSeleccionada != -1) {
-
-            //2 Obtener el dni (2 columna) del trabajador seleccionado
-            String dniSeleccionado = (String) jTable1.getValueAt(filaSeleccionada, 0);
-
-            //3 (en hilo) Mandar un mensaje al servidor "C7-ELIMINAR_TRABAJADOR:dni"
-            eliminarCliente(dniSeleccionado);
-
-        } else {
-            this.error_lbl.setText("Selecciona un trabajador primero.");
-        }
+       
 
     }//GEN-LAST:event_eliminar_lbMouseClicked
 
-    private void eliminar_lb1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lb1MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminar_lb1MouseClicked
+    private void nuevaPersonalizada_lbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevaPersonalizada_lbMouseClicked
+       int filaSeleccionadaCliente = jTable1.getSelectedRow();
+        
 
-    private void eliminar_lb1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lb1MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminar_lb1MouseEntered
+        if (filaSeleccionadaCliente != -1) {
 
-    private void eliminar_lb1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lb1MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminar_lb1MouseExited
+            //2 Obtener el dni (2 columna) del trabajador seleccionado
+            dniClienteSeleccionado = (String) jTable1.getValueAt(filaSeleccionadaCliente, 0);
+            System.out.println("dni"+dniClienteSeleccionado);
+            
+            //3 Cambiar al panel donde se dan de alta las tablas, pero añadiendole el dni para que asocie dichas tablas al cliente seleccionado
+            interfaz_menu_padre.cambiarPanelContenido(new pnl_AltaTabla(interfaz_menu_padre, inSocket, outSocket,dniClienteSeleccionado));
 
-    private void jTable2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable2MousePressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTable2MousePressed
+        }
+        
+        
+    }//GEN-LAST:event_nuevaPersonalizada_lbMouseClicked
 
-    private void jScrollPane2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jScrollPane2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jScrollPane2MouseClicked
+    private void nuevaPersonalizada_lbMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevaPersonalizada_lbMouseEntered
+        opcionFocusGained(evt);
+    }//GEN-LAST:event_nuevaPersonalizada_lbMouseEntered
 
-    private void subirImg_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subirImg_btActionPerformed
-        new Subir_Foto_interfaz(this).setVisible(true);
-    }//GEN-LAST:event_subirImg_btActionPerformed
+    private void nuevaPersonalizada_lbMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nuevaPersonalizada_lbMouseExited
+        opcionFocusLost(evt);
+    }//GEN-LAST:event_nuevaPersonalizada_lbMouseExited
 
-    private void eliminar_lb2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lb2MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminar_lb2MouseClicked
+    private void tablasModelo_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tablasModelo_btActionPerformed
+        cargarTablaRutinasModelo();
+    }//GEN-LAST:event_tablasModelo_btActionPerformed
 
-    private void eliminar_lb2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lb2MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminar_lb2MouseEntered
+    private void nueva_lbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nueva_lbMouseClicked
+        interfaz_menu_padre.cambiarPanelContenido(new pnl_AltaTabla(interfaz_menu_padre, inSocket, outSocket));
+    }//GEN-LAST:event_nueva_lbMouseClicked
 
-    private void eliminar_lb2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lb2MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminar_lb2MouseExited
+    private void nueva_lbMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nueva_lbMouseEntered
+        opcionFocusGained(evt);
+    }//GEN-LAST:event_nueva_lbMouseEntered
 
-    private void eliminar_lb3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lb3MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminar_lb3MouseClicked
+    private void nueva_lbMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_nueva_lbMouseExited
+        opcionFocusLost(evt);
+    }//GEN-LAST:event_nueva_lbMouseExited
 
-    private void eliminar_lb3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lb3MouseEntered
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminar_lb3MouseEntered
+    private void asignarTablaCliente_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_asignarTablaCliente_btActionPerformed
+        //1. Comprobar filas de ambas tablas seleccioandas
+         //1 Mirar si hay seleccionado un trabajador en la tabla
+        int filaSeleccionadaCliente = jTable1.getSelectedRow();
+        int filaSeleccionadaTabla= jTable2.getSelectedRow();
 
-    private void eliminar_lb3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_eliminar_lb3MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_eliminar_lb3MouseExited
+        if (filaSeleccionadaCliente != -1&& filaSeleccionadaTabla!=-1) {
+
+            //2 Obtener el dni (2 columna) del trabajador seleccionado
+            dniClienteSeleccionado = (String) jTable1.getValueAt(filaSeleccionadaCliente, 0);
+            int idTablaSeleccionada= (int) jTable2.getValueAt(filaSeleccionadaTabla, 0);
+            
+            //3 (en hilo) Intercambiar info con el servidor para que le agregue la tabla al cliente
+            asignarTablaAUsuario(dniClienteSeleccionado, idTablaSeleccionada);
+
+        }
+    }//GEN-LAST:event_asignarTablaCliente_btActionPerformed
+
+    private void cargarTablasBliente_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarTablasBliente_btActionPerformed
+        //1. Comprobar que halla un cliente seleccionado
+         try{
+            int filaSeleccionada = jTable1.getSelectedRow();
+
+            if (filaSeleccionada != -1) {
+                dniClienteSeleccionado = (String)jTable1.getValueAt(filaSeleccionada, 0);
+                cargarTablaRutinasCliente();
+            }
+
+        }catch(Exception e){
+            
+        }
+    }//GEN-LAST:event_cargarTablasBliente_btActionPerformed
+
+    private void cargarEjercicios_btActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarEjercicios_btActionPerformed
+        
+        int filaSeleccionadaTabla= jTable2.getSelectedRow();
+
+        if (filaSeleccionadaTabla!=-1) {
+
+            //2 Obtener el id de la tabla seleccionada
+            int idTablaSeleccionada= (int) jTable2.getValueAt(filaSeleccionadaTabla, 0);
+            int nDias= (int) jTable2.getValueAt(filaSeleccionadaTabla, 2);
+            
+            //3 (en hilo) Intercambiar info con el servidor para que le agregue la tabla al cliente
+            cargarEjerciciosTablaSeleccionada(idTablaSeleccionada, nDias);
+
+        }else{
+            JOptionPane.showMessageDialog(null, "Seleccione una rutina de ejercicios en la tabla.");
+        }
+    }//GEN-LAST:event_cargarEjercicios_btActionPerformed
+
+    private void dia_cbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dia_cbActionPerformed
+        int dia=dia_cb.getSelectedIndex()+1;
+        volcarEjercicios(dia);
+    }//GEN-LAST:event_dia_cbActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton agregarEjercicio_bt1;
-    private javax.swing.JLabel altura_lbl;
-    private javax.swing.JButton eliminarEjercicio_bt2;
+    private javax.swing.JButton asignarTablaCliente_bt;
+    private javax.swing.JButton cargarEjercicios_bt;
+    private javax.swing.JButton cargarTablasBliente_bt;
+    private javax.swing.JComboBox<String> dia_cb;
     private javax.swing.JLabel eliminar_lb;
-    private javax.swing.JLabel eliminar_lb1;
-    private javax.swing.JLabel eliminar_lb2;
-    private javax.swing.JLabel eliminar_lb3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
-    private javax.swing.JLabel notas_lbl;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JLabel nuevaPersonalizada_lb;
+    private javax.swing.JLabel nueva_lb;
     private javax.swing.JTextField patronBuscar_tf;
-    private javax.swing.JLabel peso_lbl;
-    private javax.swing.JButton subirImg_bt;
+    private javax.swing.JButton tablasModelo_bt;
     private javax.swing.JLabel titulo_lb;
     private javax.swing.JLabel titulo_lb2;
     private javax.swing.JLabel titulo_lb3;
+    private javax.swing.JLabel titulo_lb5;
     // End of variables declaration//GEN-END:variables
 
+    private void asignarTablaAUsuario(String dni, int idTabla) {
+        Thread thread_cargarClientes = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //1 Solicitar al servidor el listado de trabajadores (String)
+                    outSocket.write("C43-ASOCIAR-TABLA-A-CLIENTE:"+dni+","+idTabla+"\n");
+                    outSocket.flush();
+
+                    String respuestaServidor = inSocket.readLine();
+                    if (respuestaServidor.contains("S12-ERROR_QUERY")) {
+                        mostrarMensajeError("Error al asociar tabla al cliente: Los clientes o la tabla deben de haber sido modificados.");
+                    } else if (respuestaServidor.contains("S54-CORRECTO")) {
+                        
+                        cargarTablaRutinasCliente();
+                        
+                    } else {
+                        mostrarMensajeError("Error al asociar tabla al cliente: Los clientes o la tabla deben de haber sido modificados.");
+                    }
+
+                } catch (IOException ex) {
+                    mostrarMensajeError("El servidor no responde.");
+                }
+                cargarTablaRutinasModelo();
+            }
+        });
+        thread_cargarClientes.setDaemon(true);
+        thread_cargarClientes.start();
+
+    }
+    
+    
     private void cargarTablaClientes() {
-        Thread thread_cargarTrabajadores = new Thread(new Runnable() {
+        Thread thread_cargarClientes = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -614,15 +788,52 @@ public class pnl_Rutinas extends javax.swing.JPanel {
 
                     String respuestaServidor = inSocket.readLine();
                     if (respuestaServidor.contains("S12-ERROR_QUERY")) {
-                        System.out.println("Error al cargar la query (pendiente)");
+                        mostrarMensajeError("Error con la base de datos del servidor. Intentelo mas tarde");
                     } else if (respuestaServidor.contains("S20-LISTA_CLIENTES")) {
-                        defaultTableMode.setRowCount(0);
+                        defaultTableMode_Clientes.setRowCount(0);
                         int numeroDeUsuarios = Utilidades.contarParametros(respuestaServidor);
                         for (int i = 0; i < numeroDeUsuarios; i++) {
                             String parametroCliente = Utilidades.obtenerParametro(respuestaServidor, i + 1);
                             Object[] atributosClientes = Utilidades.obtenerCliente(parametroCliente);
-                            System.out.println("fila:" + atributosClientes);
-                            defaultTableMode.addRow(atributosClientes);
+                            
+                            defaultTableMode_Clientes.addRow(atributosClientes);
+                        }
+
+                    } else {
+                        System.out.println("Respuesta erronea del server:" + respuestaServidor);
+                    }
+
+                } catch (IOException ex) {
+                    Logger.getLogger(pnl_Rutinas.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                cargarTablaRutinasModelo();
+            }
+        });
+        thread_cargarClientes.setDaemon(true);
+        thread_cargarClientes.start();
+
+    }
+
+    private void cargarTablaRutinasModelo() {
+        //Carga las tablas modelo
+        Thread thread_cargarTablas = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //1 Solicitar al servidor el listado de trabajadores (String)
+                    outSocket.write("C41-LISTA_TABLAS_MODELO\n");
+                    outSocket.flush();
+
+                    String respuestaServidor = inSocket.readLine();
+                    if (respuestaServidor.contains("S12-ERROR_QUERY")) {
+
+                    } else if (respuestaServidor.contains("S53-LISTA_TABLAS")) {
+                        defaultTableMode_Tablas.setRowCount(0);
+                        int numeroDeTablas = Utilidades.contarParametros(respuestaServidor);
+                        for (int i = 0; i < numeroDeTablas; i++) {
+                            String parametroTabla = Utilidades.obtenerParametro(respuestaServidor, i + 1);
+                            Object[] atributosTabla = Utilidades.obtenerTabla(parametroTabla);
+                            defaultTableMode_Tablas.addRow(atributosTabla);
                         }
 
                     } else {
@@ -634,42 +845,34 @@ public class pnl_Rutinas extends javax.swing.JPanel {
                 }
             }
         });
-
-        thread_cargarTrabajadores.start();
+        thread_cargarTablas.setDaemon(true);
+        thread_cargarTablas.start();
 
     }
-
-    private void eliminarCliente(String DNI) {
-
-        Thread thread_eliminarTrabajador = new Thread(new Runnable() {
+    private void cargarTablaRutinasCliente() {
+        //Carga las tablas modelo
+        Thread thread_cargarTablas = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    //1. COMPROBAR si tiene FOTO, para ELIMINARLA tambien.
-                    if(rutaFotoSeleccionada!=null){
-                        
-                        System.out.println("Interfaz: Entra en eliminar foto:"+rutaFotoSeleccionada);
-                        outSocket.write("C20_ELIMINAR_FOTO:" + rutaFotoSeleccionada + "\n");
-                        outSocket.flush();
-                        String respuestaServidor = inSocket.readLine(); 
-                        
-                    }
-                    
-                    //2. ELIMINAR TUPLA CLIENTE desde el servidor. 
-
-                    outSocket.write("C19_ELIMINAR_CLIENTE:" + DNI + "\n");
+                    //1 Solicitar al servidor el listado de trabajadores (String)
+                    outSocket.write("C42-LISTA_TABLAS_CLIENTE:"+dniClienteSeleccionado+"\n");
                     outSocket.flush();
 
                     String respuestaServidor = inSocket.readLine();
+                    if (respuestaServidor.contains("S12-ERROR_QUERY")) {
 
-                    if (respuestaServidor.contains("S26-CLIENTE_NO_ENCONTRADO")) {
-                        error_lbl.setText("El trabajador no ha podido ser eliminado.Otro administrador debe de haberlo eliminado o modificado.");
-                    } else if (respuestaServidor.contains("S25-CLIENTE_ELIMINADO")) {
-                        error_lbl.setText("Eliminacion completada exitosamente.");
-                        defaultTableMode.setRowCount(0);
-                        cargarTablaClientes();
+                    } else if (respuestaServidor.contains("S53-LISTA_TABLAS")) {
+                        defaultTableMode_Tablas.setRowCount(0);
+                        int numeroDeTablas = Utilidades.contarParametros(respuestaServidor);
+                        for (int i = 0; i < numeroDeTablas; i++) {
+                            String parametroTabla = Utilidades.obtenerParametro(respuestaServidor, i + 1);
+                            Object[] atributosTabla = Utilidades.obtenerTabla(parametroTabla);
+                            defaultTableMode_Tablas.addRow(atributosTabla);
+                        }
+
                     } else {
-                        error_lbl.setText("Error en el servidor. Intentelo mas tarde");
+                        System.out.println("Respuesta erronea del server:" + respuestaServidor);
                     }
 
                 } catch (IOException ex) {
@@ -677,9 +880,53 @@ public class pnl_Rutinas extends javax.swing.JPanel {
                 }
             }
         });
+        thread_cargarTablas.setDaemon(true);
+        thread_cargarTablas.start();
 
-        thread_eliminarTrabajador.start();
     }
+    
+    
+
+//    private void eliminarCliente(String DNI) {
+//
+//        Thread thread_eliminarTrabajador = new Thread(new Runnable() {
+//            @Override
+//            public void run() {
+//                try {
+//                    //1. COMPROBAR si tiene FOTO, para ELIMINARLA tambien.
+//                    if (rutaFotoSeleccionada != null) {
+//
+//                        System.out.println("Interfaz: Entra en eliminar foto:" + rutaFotoSeleccionada);
+//                        outSocket.write("C20_ELIMINAR_FOTO:" + rutaFotoSeleccionada + "\n");
+//                        outSocket.flush();
+//                        String respuestaServidor = inSocket.readLine();
+//
+//                    }
+//
+//                    //2. ELIMINAR TUPLA CLIENTE desde el servidor. 
+//                    outSocket.write("C19_ELIMINAR_CLIENTE:" + DNI + "\n");
+//                    outSocket.flush();
+//
+//                    String respuestaServidor = inSocket.readLine();
+//
+//                    if (respuestaServidor.contains("S26-CLIENTE_NO_ENCONTRADO")) {
+//                        error_lbl.setText("El trabajador no ha podido ser eliminado.Otro administrador debe de haberlo eliminado o modificado.");
+//                    } else if (respuestaServidor.contains("S25-CLIENTE_ELIMINADO")) {
+//                        error_lbl.setText("Eliminacion completada exitosamente.");
+//                        defaultTableMode_Clientes.setRowCount(0);
+//                        cargarTablaClientes();
+//                    } else {
+//                        error_lbl.setText("Error en el servidor. Intentelo mas tarde");
+//                    }
+//
+//                } catch (IOException ex) {
+//                    Logger.getLogger(pnl_Rutinas.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        });
+//
+//        thread_eliminarTrabajador.start();
+//    }
 
     private void opcionFocusGained(java.awt.event.MouseEvent evt) {
         JLabel labelFocus = (JLabel) evt.getSource();
@@ -698,8 +945,8 @@ public class pnl_Rutinas extends javax.swing.JPanel {
     }
 
     private void darFormatoTabla() {
-
-        defaultTableMode = (DefaultTableModel) this.jTable1.getModel();
+        
+        defaultTableMode_Clientes = (DefaultTableModel) this.jTable1.getModel();
         jTable1.getTableHeader().setOpaque(false);
         jTable1.getTableHeader().setBackground(new Color(74, 31, 61));
         jTable1.getTableHeader().setForeground(new Color(255, 255, 255));
@@ -709,13 +956,52 @@ public class pnl_Rutinas extends javax.swing.JPanel {
         jScrollPane1.setOpaque(false);
         jScrollPane1.getViewport().setOpaque(false);
         jScrollPane1.setBorder(createEmptyBorder());
+        
+        defaultTableMode_Tablas = (DefaultTableModel) this.jTable2.getModel();
+        jTable2.getTableHeader().setOpaque(false);
+        jTable2.getTableHeader().setBackground(new Color(74, 31, 61));
+        jTable2.getTableHeader().setForeground(new Color(255, 255, 255));
+        jTable2.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 50));
+        jTable2.setRowHeight(50);
+
+        jScrollPane2.setOpaque(false);
+        jScrollPane2.getViewport().setOpaque(false);
+        jScrollPane2.setBorder(createEmptyBorder());
+        
+        
+        defaultTableMode_Ejercicios = (DefaultTableModel) this.jTable3.getModel();
+        jTable3.getTableHeader().setOpaque(false);
+        jTable3.getTableHeader().setBackground(new Color(74, 31, 61));
+        jTable3.getTableHeader().setForeground(new Color(255, 255, 255));
+        jTable3.getTableHeader().setPreferredSize(new Dimension(jScrollPane1.getWidth(), 50));
+        jTable3.setRowHeight(50);
+
+        jScrollPane3.setOpaque(false);
+        jScrollPane3.getViewport().setOpaque(false);
+        jScrollPane3.setBorder(createEmptyBorder());
 
         Font labelFont = patronBuscar_tf.getFont();
 
         jTable1.getTableHeader().setFont(new Font(labelFont.getName(), Font.PLAIN, labelFont.getSize()));
+        jTable2.getTableHeader().setFont(new Font(labelFont.getName(), Font.PLAIN, labelFont.getSize()));
+        jTable3.getTableHeader().setFont(new Font(labelFont.getName(), Font.PLAIN, labelFont.getSize()));
 
         //Cambiar barra 
         jScrollPane1.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = new Color(74, 31, 61);
+            }
+
+        });
+        jScrollPane2.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
+            @Override
+            protected void configureScrollBarColors() {
+                this.thumbColor = new Color(74, 31, 61);
+            }
+
+        });
+        jScrollPane3.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
             @Override
             protected void configureScrollBarColors() {
                 this.thumbColor = new Color(74, 31, 61);
@@ -742,13 +1028,13 @@ public class pnl_Rutinas extends javax.swing.JPanel {
                     if (respuestaServidor.contains("S12-ERROR_QUERY")) {
                         System.out.println("Error al cargar la query (pendiente)");
                     } else if (respuestaServidor.contains("S20-LISTA_CLIENTES")) {
-                        defaultTableMode.setRowCount(0);
+                        defaultTableMode_Clientes.setRowCount(0);
                         int numeroDeUsuarios = Utilidades.contarParametros(respuestaServidor);  //Cuenta cuantos usuarios devuelve tras filtrar
                         for (int i = 0; i < numeroDeUsuarios; i++) {
                             String parametroCliente = Utilidades.obtenerParametro(respuestaServidor, i + 1);
                             Object[] atributosCliente = Utilidades.obtenerCliente(parametroCliente);
                             System.out.println("fila:" + atributosCliente);
-                            defaultTableMode.addRow(atributosCliente);
+                            defaultTableMode_Clientes.addRow(atributosCliente);
                         }
 
                     } else {
@@ -764,85 +1050,106 @@ public class pnl_Rutinas extends javax.swing.JPanel {
         thread_cargarTrabajadores.start();
     }
 
-    private void mostrarDatosCliente(String dniSeleccionado) {
-        Thread thread_mostrarCliente = new Thread(new Runnable() {
+   
+
+    public void mostrarMensajeError(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
+
+    private void cargarEjerciciosTablaSeleccionada(int idTabla, int nDias) {
+        
+        Thread thread_cargarClientes = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     //1 Solicitar al servidor el listado de trabajadores (String)
-                    outSocket.write("C16-MOSTRAR_CLIENTE:" + dniSeleccionado + "\n");
+                    outSocket.write("C45-CARGAR_EJERCICIOS:"+idTabla+"\n");
                     outSocket.flush();
 
                     String respuestaServidor = inSocket.readLine();
-                    if (respuestaServidor.contains("S12-ERROR_QUERY")) {
-                        System.out.println("Error al cargar la query (pendiente)");
-                    } else if (respuestaServidor.contains("S21-INFO_CLIENTE")) {
-                        int numeroDeUsuarios = Utilidades.contarParametros(respuestaServidor);  //Cuenta cuantos usuarios devuelve tras filtrar
-                        for (int i = 0; i < numeroDeUsuarios; i++) {
-                            String parametroCliente = Utilidades.obtenerParametro(respuestaServidor, i + 1);
-                            Object[] atributosCliente = Utilidades.obtenerDatosCliente(parametroCliente,"&");
+                    if (respuestaServidor.contains("S60-ERROR")) {
+                        mostrarMensajeError("Error: La tabla debe de haber sido modificada/eliminada.");
+                    } else if (respuestaServidor.contains("S64-LISTA_EJERCICIOS_DE_TABLA")) {
+                        int numeroDeTablas = Utilidades.contarParametros(respuestaServidor, '&');
+                        //Resetear las lsitas de ejercicios y llenarlas con los nuevos
+                        inicializarListasEjercicios();
+                        for (int i = 0; i < numeroDeTablas; i++) {
+                            String cadenaDatosReserva = Utilidades.obtenerParametro(respuestaServidor, i + 1,'&');
+                            Ejercicio ejercicio = Utilidades.obtenerEjercicioModelo(cadenaDatosReserva);
 
-                            dni_lbl.setText("DNI: " + atributosCliente[0]);
-                            nombre_lbl.setText("Nombre:" + atributosCliente[1]);
-                            apellido_lbl.setText("Apellido:" + atributosCliente[2]);
-                            fecha_lbl.setText("Fecha de nacimiento::" + atributosCliente[3]);
-                            peso_lbl.setText("Peso:" + atributosCliente[4]);
-                            altura_lbl.setText("Altura:" + atributosCliente[5]);
-                            notas_lbl.setText("Notas:" + atributosCliente[6]);
+                            if (ejercicio != null) {
+                                //Log.e("EJERCICIO " + i, ejercicio.toString());
+                                int dia = ejercicio.getDia();
+                                lDiasEjercicios.get(dia - 1).add(ejercicio);
 
-                            String rutaImagen = (String) atributosCliente[7];
-                            System.out.println("Ruta cogida:"+rutaImagen);
-                            if (rutaImagen.equals("") || rutaImagen==null) {
-                                cargarImagenNoDisponible();
-                                rutaFotoSeleccionada=null;
-                            } else {
-                                Utilidades.mostrarImagen(rutaImagen, imagen_lbl,200,250);
-                                rutaFotoSeleccionada=rutaImagen;
                             }
-
+                            actualizarComboDiasDisponibles(nDias);
                         }
+                        //Una vez tenemos los ejercicios cargados en las tablas, solo habra que recorrerlas y volcarlas en la tabla
+                        //Mostramos los ejercicios del dia 1
+                        volcarEjercicios(1);
+                        
 
+                        //cargarTablaRutinasCliente();
+                        
                     } else {
-                        System.out.println("Respuesta erronea del server:" + respuestaServidor);
+                        mostrarMensajeError("Error al asociar tabla al cliente: Los clientes o la tabla deben de haber sido modificados.");
                     }
 
                 } catch (IOException ex) {
-                    Logger.getLogger(pnl_Rutinas.class.getName()).log(Level.SEVERE, null, ex);
+                    mostrarMensajeError("El servidor no responde.");
                 }
+                cargarTablaRutinasModelo();
             }
 
             
-            
-                    
-            
-
-            
-
-            private void cargarImagenNoDisponible() {
-
-                try {
-                    File imagenNoDisponible = new File("./src/Recursos/FotoNoDisponible.jpg");
-                    byte[] imagenTotal = Files.readAllBytes(imagenNoDisponible.toPath());
-                    final int ANCHURA_IMG = 200;
-                    final int ALTURA_IMG = 250;
-                    ByteArrayInputStream bais = new ByteArrayInputStream(imagenTotal);
-                    BufferedImage img = ImageIO.read(bais);
-                    System.out.println(img);
-                    BufferedImage resizedImage = Utilidades.resizeImage(img, ANCHURA_IMG, ALTURA_IMG);
-                    imagen_lbl.setIcon(new ImageIcon(resizedImage));
-
-                } catch (IOException ex) {
-
-                }
-
-            }
         });
-        thread_mostrarCliente.setDaemon(true);
-        thread_mostrarCliente.start();
+        thread_cargarClientes.setDaemon(true);
+        thread_cargarClientes.start();
+
+        
+    }
+
+    private void inicializarListasEjercicios() {
+        ejerciciosDia1 = new ArrayList<>();
+        ejerciciosDia2 = new ArrayList<>();
+        ejerciciosDia3 = new ArrayList<>();
+        ejerciciosDia4 = new ArrayList<>();
+        ejerciciosDia5 = new ArrayList<>();
+        ejerciciosDia6 = new ArrayList<>();
+        ejerciciosDia7 = new ArrayList<>();
+        lDiasEjercicios = new ArrayList<ArrayList<Ejercicio>>();
+
+        lDiasEjercicios.add(ejerciciosDia1);
+        lDiasEjercicios.add(ejerciciosDia2);
+        lDiasEjercicios.add(ejerciciosDia3);
+        lDiasEjercicios.add(ejerciciosDia4);
+        lDiasEjercicios.add(ejerciciosDia5);
+        lDiasEjercicios.add(ejerciciosDia6);
+        lDiasEjercicios.add(ejerciciosDia7);
+    }
+
+    private void volcarEjercicios(int dia) {
+        //Recorre todos los ejercicios almacenados en la lista de ejercicios dia indicado
+        if(dia==0) dia=1; 
+        
+        defaultTableMode_Ejercicios.setRowCount(0);
+        for (Ejercicio ejercicio : lDiasEjercicios.get(dia-1)) {
+            Object[] fila=ejercicio.getFila();
+            defaultTableMode_Ejercicios.addRow(fila);
+  
+        }
+
     }
     
-    public void mostrarMensajeError(String mensaje){
-        error_lbl.setText(mensaje);
+    private void actualizarComboDiasDisponibles(int nDias) {
+        //1 Vaciar Combo
+        dia_cb.removeAllItems();
+        //2 Rellenarlo con los dias que esten disponibles
+        for(int i=1;i<=nDias;i++){
+            dia_cb.addItem("Dia "+i);
+        }  
+        
     }
 
 }

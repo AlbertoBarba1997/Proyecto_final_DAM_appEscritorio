@@ -65,18 +65,19 @@ public class pnl_Claves extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         eliminar_lb = new javax.swing.JLabel();
-        nuevo_lb = new javax.swing.JLabel();
-        modificar_lb = new javax.swing.JLabel();
         error_lbl = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         patronBuscar_tf = new javax.swing.JTextField();
+        jPanel2 = new javax.swing.JPanel();
         nuevo_lb1 = new javax.swing.JLabel();
         nombre_tf = new javax.swing.JTextField();
         nuevo_lb2 = new javax.swing.JLabel();
         clave_tf = new javax.swing.JTextField();
         añadirRol_lb = new javax.swing.JLabel();
+        nuevo_lb = new javax.swing.JLabel();
         añadirClave_lb = new javax.swing.JLabel();
+        modificar_lb = new javax.swing.JLabel();
         nuevo_lb3 = new javax.swing.JLabel();
         nuevaClave_tf = new javax.swing.JTextField();
 
@@ -145,27 +146,6 @@ public class pnl_Claves extends javax.swing.JPanel {
             }
         });
 
-        nuevo_lb.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
-        nuevo_lb.setForeground(new java.awt.Color(255, 255, 255));
-        nuevo_lb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_plus_30px.png"))); // NOI18N
-        nuevo_lb.setText("Nuevo Rol");
-
-        modificar_lb.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
-        modificar_lb.setForeground(new java.awt.Color(255, 255, 255));
-        modificar_lb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_edit_30px.png"))); // NOI18N
-        modificar_lb.setText("Añadir / Modificar clave");
-        modificar_lb.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                modificar_lbMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                modificar_lbMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                modificar_lbMouseExited(evt);
-            }
-        });
-
         error_lbl.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
         error_lbl.setForeground(new java.awt.Color(255, 255, 255));
         error_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -206,6 +186,9 @@ public class pnl_Claves extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jPanel2.setOpaque(false);
+
         nuevo_lb1.setFont(new java.awt.Font("Dialog", 2, 16)); // NOI18N
         nuevo_lb1.setForeground(new java.awt.Color(255, 255, 255));
         nuevo_lb1.setText("Nombre:");
@@ -245,6 +228,11 @@ public class pnl_Claves extends javax.swing.JPanel {
             }
         });
 
+        nuevo_lb.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
+        nuevo_lb.setForeground(new java.awt.Color(255, 255, 255));
+        nuevo_lb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_plus_30px.png"))); // NOI18N
+        nuevo_lb.setText("Nuevo Rol");
+
         añadirClave_lb.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
         añadirClave_lb.setForeground(new java.awt.Color(255, 255, 255));
         añadirClave_lb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -262,6 +250,22 @@ public class pnl_Claves extends javax.swing.JPanel {
             }
         });
 
+        modificar_lb.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
+        modificar_lb.setForeground(new java.awt.Color(255, 255, 255));
+        modificar_lb.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_edit_30px.png"))); // NOI18N
+        modificar_lb.setText("Modificar clave");
+        modificar_lb.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                modificar_lbMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                modificar_lbMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                modificar_lbMouseExited(evt);
+            }
+        });
+
         nuevo_lb3.setFont(new java.awt.Font("Dialog", 2, 16)); // NOI18N
         nuevo_lb3.setForeground(new java.awt.Color(255, 255, 255));
         nuevo_lb3.setText("Nueva clave:");
@@ -273,88 +277,103 @@ public class pnl_Claves extends javax.swing.JPanel {
             }
         });
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(nuevo_lb1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nombre_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, Short.MAX_VALUE)
+                .addComponent(nuevo_lb2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(clave_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(añadirRol_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(nuevo_lb3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(nuevaClave_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(añadirClave_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(modificar_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(nuevo_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addComponent(nuevo_lb)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nuevo_lb1)
+                    .addComponent(nombre_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nuevo_lb2)
+                    .addComponent(clave_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(añadirRol_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(83, 83, 83)
+                .addComponent(modificar_lb)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nuevaClave_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(añadirClave_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nuevo_lb3))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(59, 59, 59)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(181, 181, 181)
-                        .addComponent(eliminar_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(354, 354, 354)
-                        .addComponent(error_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(titulo_lb)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(titulo_lb)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(136, 136, 136))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(602, 602, 602)
-                                .addComponent(nuevo_lb3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(nuevaClave_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56)
-                                .addComponent(añadirClave_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(69, 69, 69)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(nuevo_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(modificar_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(0, 0, Short.MAX_VALUE))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(111, 111, 111)
-                                        .addComponent(nuevo_lb1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(nombre_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(43, 43, 43)
-                                        .addComponent(nuevo_lb2, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(clave_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(3476, 3476, 3476)
-                                .addComponent(añadirRol_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(355, 355, 355))))
+                                .addGap(165, 165, 165)
+                                .addComponent(eliminar_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 491, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(96, 96, 96)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(491, 491, 491))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(error_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(556, 556, 556))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(titulo_lb)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(48, 48, 48)
-                        .addComponent(nuevo_lb)
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nuevo_lb1)
-                            .addComponent(nombre_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nuevo_lb2)
-                            .addComponent(clave_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(añadirRol_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(81, 81, 81)
-                        .addComponent(modificar_lb)
-                        .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(nuevaClave_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(añadirClave_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nuevo_lb3)))
+                        .addGap(83, 83, 83)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(error_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(eliminar_lb))
-                .addContainerGap(286, Short.MAX_VALUE))
+                        .addGap(92, 92, 92)
+                        .addComponent(titulo_lb)
+                        .addGap(28, 28, 28)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(eliminar_lb)))
+                .addGap(4, 4, 4)
+                .addComponent(error_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(258, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -391,36 +410,15 @@ public class pnl_Claves extends javax.swing.JPanel {
     }//GEN-LAST:event_eliminar_lbMouseClicked
 
     private void modificar_lbMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificar_lbMouseExited
-        Utilidades.opcionFocusLost(evt);
+        
     }//GEN-LAST:event_modificar_lbMouseExited
 
     private void modificar_lbMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificar_lbMouseEntered
-        Utilidades.opcionFocusGained(evt);
+        
     }//GEN-LAST:event_modificar_lbMouseEntered
 
     private void modificar_lbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_modificar_lbMouseClicked
-        //1 Mirar si hay seleccionado un trabajador en la tabla
-        int filaSeleccionada = jTable1.getSelectedRow();
         
-        if (filaSeleccionada != -1) {
-
-            //2 Obtener datos trabajador
-            String dniSeleccionado = (String) jTable1.getValueAt(filaSeleccionada, 0);
-            String nombre = (String) jTable1.getValueAt(filaSeleccionada, 1);
-            String apellidos = (String) jTable1.getValueAt(filaSeleccionada, 2);
-            float salario = (Float) jTable1.getValueAt(filaSeleccionada, 3);
-            String correo = (String) jTable1.getValueAt(filaSeleccionada, 4);
-            
-
-            Object[] datosTrabajador={dniSeleccionado, nombre, apellidos,correo, salario};
-            
-            //3 Cambia a panel modificar con los datos del trabajador seleccionado
-            interfaz_menu_padre.cambiarPanelContenido(new pnl_ModificarTrabajador(interfaz_menu_padre, inSocket, outSocket, datosTrabajador));
-            
-            
-        } else {
-            this.error_lbl.setText("Selecciona un trabajador primero.");
-        }
         
     }//GEN-LAST:event_modificar_lbMouseClicked
 
@@ -445,7 +443,7 @@ public class pnl_Claves extends javax.swing.JPanel {
         
         //2 comprobar que no estan vacios
         if(nombre.equals("")||clave.equals("")){
-            error_lbl.setText("Los campos \"nombre\" y \"clave\" deben estar llenos.");
+            error_lbl.setText("Los campos \"nombre\" y \"clave\" deben estar llenos. Puede seleccionar '0' como clave si no desea ninguna");
         }else{
             //3 lanzar metodo 
             registrarRol(nombre, clave);
@@ -462,7 +460,24 @@ public class pnl_Claves extends javax.swing.JPanel {
     }//GEN-LAST:event_añadirRol_lbMouseExited
 
     private void añadirClave_lbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_añadirClave_lbMouseClicked
-        // TODO add your handling code here:
+         //1 Mirar si hay seleccionado un trabajador en la tabla
+        int filaSeleccionada = jTable1.getSelectedRow();
+        
+        if (filaSeleccionada != -1) {
+
+            //2 Obtener el dni (2 columna) del trabajador seleccionado
+            int rolSeleccionado = (int) jTable1.getValueAt(filaSeleccionada, 0);
+            String nuevaClave= nuevaClave_tf.getText();
+            if(!nuevaClave.isEmpty()){
+                //3 (en hilo) Mandar un mensaje al servidor "C7-ELIMINAR_TRABAJADOR:dni"
+                modificarClave(rolSeleccionado,nuevaClave);
+            }else{
+                error_lbl.setText("Rellene el campo de 'Nueva clave'.");
+            }
+            
+        } else {
+            this.error_lbl.setText("Selecciona un rol en la tabla.");
+        }
     }//GEN-LAST:event_añadirClave_lbMouseClicked
 
     private void añadirClave_lbMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_añadirClave_lbMouseEntered
@@ -486,6 +501,7 @@ public class pnl_Claves extends javax.swing.JPanel {
     private javax.swing.JLabel error_lbl;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel modificar_lb;
@@ -518,7 +534,7 @@ public class pnl_Claves extends javax.swing.JPanel {
                         for (int i = 0; i < numeroDeRoles; i++) {
                             String parametroClave = Utilidades.obtenerParametro(respuestaServidor, i + 1);
                             Object[] atributosClave = Utilidades.obtenerAtributosClave(parametroClave);
-                            System.out.println("fila:" + atributosClave);
+                            
                             defaultTableMode.addRow(atributosClave);
                         }
 
@@ -671,6 +687,36 @@ public class pnl_Claves extends javax.swing.JPanel {
         });
 
         thread_eliminarRol.start();
+    }
+
+    private void modificarClave(int rolSeleccionado, String nuevaClave) {
+        Thread thread_ModificarClave = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    //1 Solicitar al servidor el listado de trabajadores (String)
+                    System.out.println("Entra Eliminar trabajador");
+
+                    outSocket.write("C59_MODIFICAR_CLAVE:"+rolSeleccionado+","+nuevaClave+"\n");
+                    outSocket.flush();
+
+                    String respuestaServidor = inSocket.readLine();
+                   
+                    if (respuestaServidor.contains("S13-CLAVE_ACTUALIZADA")) {
+                        error_lbl.setText("Clave actualizada.");
+                        defaultTableMode.setRowCount(0);
+                        cargarTablaClaves();
+                    } else {
+                        error_lbl.setText("No se puede actualizar esta clave");
+                    }
+
+                } catch (IOException ex) {
+                    Logger.getLogger(pnl_Trabajadores.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+
+        thread_ModificarClave.start();
     }
 
     

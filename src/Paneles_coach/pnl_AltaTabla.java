@@ -96,7 +96,7 @@ public class pnl_AltaTabla extends javax.swing.JPanel {
         //Si viene con id de usuario, es una tabla personalizada para un solo usuario.
         tablaBase=false;
         this.dniUsuarioTabla=dniUsuarioTabla;
-        
+        System.out.println("Usuario que llega por constructor "+this.dniUsuarioTabla);
         initComponents();
         filtradoRolAnterior=0;
         this.interfaz_menu_padre = interfaz_menu_padre;
@@ -108,7 +108,9 @@ public class pnl_AltaTabla extends javax.swing.JPanel {
 
         configurarApariencia();
 
-        cargarTablaEjercicios();  
+        cargarTablaEjercicios(); 
+        
+        inicializarListasDias();
         
     }
 
@@ -886,7 +888,7 @@ public class pnl_AltaTabla extends javax.swing.JPanel {
                 crearTablaModelo(nombreTabla, nDias,listadoEjerciciosString);
                 
             }else{
-                crearTablaPersonalizada(nombreTabla,nDias, listadoEjerciciosString, dniUsuarioTabla);
+                crearTablaPersonalizada(nombreTabla,nDias, listadoEjerciciosString);
                 
             }
             
@@ -1374,7 +1376,7 @@ public class pnl_AltaTabla extends javax.swing.JPanel {
     }
 
 
-    private void crearTablaPersonalizada(String nombreTabla, int nDias, String listaEjerciciosString, String dniUsuarioTabla) {
+    private void crearTablaPersonalizada(String nombreTabla, int nDias, String listaEjerciciosString) {
          Thread thread_altaTabla = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -1387,8 +1389,9 @@ public class pnl_AltaTabla extends javax.swing.JPanel {
 
                     if (respuestaServidor.contains("S52-TABLA_REGISTRADA")) {
                         JOptionPane.showMessageDialog(null, "Tabla registrada con exito");
-                        inicializarListasDias();
-                        ActualizarInformacionTabla();
+                        //inicializarListasDias();
+                        //ActualizarInformacionTabla();
+                        interfaz_menu_padre.cambiarPanelContenido(new pnl_Rutinas(interfaz_menu_padre, inSocket, outSocket));
                     } else {
                         JOptionPane.showMessageDialog(null, "Error en el registro.");
                     }

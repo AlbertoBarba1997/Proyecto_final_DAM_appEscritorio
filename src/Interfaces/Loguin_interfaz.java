@@ -8,23 +8,27 @@ package Interfaces;
 import Util.Utilidades;
 import java.awt.Frame;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 import javafx.scene.input.KeyCode;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
-/**
- *
- * @author juana
- */
+
 public class Loguin_interfaz extends javax.swing.JFrame {
 
     String nombreUsuario;
     Socket conexionSocket;
     BufferedReader inputSocket;
     PrintWriter outputSocket;
+    boolean conexionEstablecida=true;
+    
+    String DIRECCION_IP="192.168.0.11";
+    int PUERTO=9002;
     
     public Loguin_interfaz() {
         
@@ -181,7 +185,7 @@ public class Loguin_interfaz extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(acceder_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+            .addComponent(acceder_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -207,9 +211,6 @@ public class Loguin_interfaz extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,14 +220,17 @@ public class Loguin_interfaz extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jSeparator2)
-                    .addComponent(dni_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
-                    .addComponent(clave_tf)
+                    .addComponent(dni_tf)
+                    .addComponent(clave_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
                     .addComponent(jSeparator1))
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(51, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(error_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(error_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -246,9 +250,9 @@ public class Loguin_interfaz extends javax.swing.JFrame {
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(30, 30, 30)
                 .addComponent(error_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43))
+                .addContainerGap(55, Short.MAX_VALUE))
         );
 
         dni_tf.getAccessibleContext().setAccessibleName("");
@@ -260,8 +264,7 @@ public class Loguin_interfaz extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,14 +338,18 @@ public class Loguin_interfaz extends javax.swing.JFrame {
     }//GEN-LAST:event_FocusLostPass
 
     private void acceder_btMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_acceder_btMouseClicked
+        error_lb.setText("");
         log();
 
 
     }//GEN-LAST:event_acceder_btMouseClicked
 
     private void error_lbMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_error_lbMouseClicked
-        error_lb.setText("");
-        iniciarConexion();
+        if(!conexionEstablecida){
+            error_lb.setText("");
+            new Ajustes_conexion_interfaz(this).setVisible(true);
+            
+        }
     }//GEN-LAST:event_error_lbMouseClicked
 
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
@@ -416,6 +423,9 @@ public class Loguin_interfaz extends javax.swing.JFrame {
     }
     private int logIn(String dni, String clave) {
         int resultado=-1;
+        
+        if(!conexionEstablecida) iniciarConexion();
+        
         try {
             outputSocket.println("C4-LOG_TRABAJADOR:" + dni + "," + clave);
             outputSocket.flush();
@@ -433,7 +443,7 @@ public class Loguin_interfaz extends javax.swing.JFrame {
             }
 
         } catch (IOException ioe) {
-
+            resultado=-1;
         }
 
         return resultado;
@@ -442,19 +452,45 @@ public class Loguin_interfaz extends javax.swing.JFrame {
     
     
 
-    private void iniciarConexion() {
+    public void iniciarConexion() {
         try {
-            //Replace below IP with the IP of that device in which server socket open.
-            //If you change port then change the port number in the server side code also.
-            conexionSocket = new Socket("192.168.0.11", 9002);
+            //Obtener el puerto y la IP registrados en el txt
+            obtenerDatosConexion();
+            
+            //Estableces conexion
+            conexionSocket = new Socket(DIRECCION_IP, PUERTO);
             outputSocket = new PrintWriter(conexionSocket.getOutputStream());
             inputSocket = new BufferedReader(new InputStreamReader(conexionSocket.getInputStream()));
-            
-
+            conexionEstablecida=true;
+            error_lb.setText("");
             
         } catch (IOException e) {
             e.printStackTrace();
-            error_lb.setText("Error de conexion con servidor ¿Volver a intentar?");
+            conexionEstablecida = false;
+            error_lb.setText("Error de conexion. Pulse aqui para reajustarla.");
+            //JOptionPane.showMessageDialog(null, "Error de conexion: Puede que el servidor este apagado por mantenimiento, vuela a pulsar 'Acceder' para intentar volver a reconectar. Si persiste puede ajustar los parametros del servidor pulsando en el mensaje de error.");
+                
+            
+        }
+    }
+
+    private void obtenerDatosConexion() {
+        BufferedReader br;
+        File archivoConfiguracion=new File("./config_conection.txt");
+        System.out.println("Existe el archivo?"+archivoConfiguracion.exists());
+        
+        try{
+            br=new BufferedReader(new FileReader(archivoConfiguracion));
+            String linea=br.readLine();
+            DIRECCION_IP=Utilidades.obtenerParametro(linea, 1);
+            linea=br.readLine();
+            PUERTO=Integer.parseInt(Utilidades.obtenerParametro(linea, 1));
+            
+        }catch(Exception e){
+
+            DIRECCION_IP=null;
+            PUERTO=-1;
+            e.printStackTrace();
         }
     }
     

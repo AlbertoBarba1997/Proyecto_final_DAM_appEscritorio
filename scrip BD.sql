@@ -123,7 +123,7 @@ create table EJ_TABLA_MTM(
 	repeticiones INT DEFAULT 0,
 	tiempo VARCHAR(10) DEFAULT "",
 
-	PRIMARY KEY(id_ejercicio,id_tabla),
+	PRIMARY KEY(id_ejercicio,id_tabla,dia),
 	FOREIGN KEY (id_ejercicio) REFERENCES EJERCICIO(id) ON DELETE CASCADE, 
     FOREIGN KEY (id_tabla) REFERENCES TABLA(id) ON DELETE CASCADE	
 
@@ -149,6 +149,19 @@ create table TABLA_USUARIO_MTM(
 );
 
 
+create table RESERVA_USU_HORARIO(
+    id INT NOT NULL auto_increment UNIQUE,
+    id_usuario INT not null,
+    id_horario INT not null,
+    fecha DATE default CURRENT_DATE,
+
+    PRIMARY KEY(id_usuario,id_horario),
+    FOREIGN KEY (id_horario) REFERENCES HORARIO(id) ON DELETE CASCADE, 
+    FOREIGN KEY (id_usuario) REFERENCES USUARIO(id) ON DELETE CASCADE	
+
+);
+
+
 
 
 
@@ -165,6 +178,8 @@ insert into ejercicio_musculo_mtm (id_ejercicio,id_musculo) VALUES (8,4)
 INSERT INTO tabla(nombre, dias, tabla_Base) VALUES ('Full body', 3, true);
 Select id From tabla where nombre='full body';
 insert into ej_tabla_mtm (id_ejercicio,id_tabla, dia,series, repeticiones,tiempo) VALUES (1,0,1,3,8,'8 minutos')
+
+
 
 
 

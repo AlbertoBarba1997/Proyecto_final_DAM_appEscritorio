@@ -5,6 +5,7 @@
  */
 package Util;
 
+import Modelo.Ejercicio;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -128,6 +129,31 @@ public class Utilidades {
         }
         return parametro;
     }
+     public static String obtenerParametro(String theInput, int nParametroBuscado, char separador) {
+        //OBTIENE EL PARAMETRO indicado en la cadena indicada y el separador ( "," o "&")
+
+        int nParametro = 0;       //Mide por que parametro va, cuando lea un ":" o una "," -> nParametro++;
+
+        char[] caracteres = theInput.toCharArray();
+        String parametro = "";
+        boolean comenzo = false;
+
+        for (char c : caracteres) {
+
+            if (c == ':' && comenzo == false) {
+                nParametro++;
+                comenzo = true;
+
+            } else if (c == separador) {
+                nParametro++;
+            } else if (nParametro == nParametroBuscado) {
+                parametro += c;
+            }
+
+        }
+        return parametro;
+    }
+    
 
     public static int contarParametros(String respuestaServidor) {
         //CUENTA CUANTOS PARAMETROS HAY EN UNA SECUENCIA String
@@ -148,6 +174,60 @@ public class Utilidades {
         }
         return nParametros;
 
+    }
+    public static int contarParametros(String respuestaServidor, char separador) {
+        //CUENTA CUANTOS PARAMETROS HAY EN UNA SECUENCIA String
+        final String caracterDelimitador = ""+separador;
+        int nParametros = 0;
+
+        if (respuestaServidor.contains(":")) {
+            nParametros = 1;
+
+            if (respuestaServidor.contains(caracterDelimitador)) {
+                char[] arrayCaracteres = respuestaServidor.toCharArray();
+                for (char c : arrayCaracteres) {
+                    if (c == separador) {
+                        nParametros++;
+                    }
+                }
+            }
+        }
+        return nParametros;
+
+    }
+    
+    
+    public static Ejercicio obtenerEjercicioModelo(String parametroEjercicio) {
+
+        Ejercicio ejercicio=null;
+        final String separador = "$";
+
+        int idEjercicio = Integer.parseInt(obtenerAtributo(parametroEjercicio, 0, separador));
+        int dia = Integer.parseInt(obtenerAtributo(parametroEjercicio, 1, separador));
+        String nombre= obtenerAtributo(parametroEjercicio, 2, separador);
+        String descripcion= obtenerAtributo(parametroEjercicio, 3, separador);
+        String tipo= obtenerAtributo(parametroEjercicio, 4, separador);
+        String rutaImg= obtenerAtributo(parametroEjercicio, 5, separador);
+
+        int series;
+        int repeticiones;
+        try {
+            series = Integer.parseInt(obtenerAtributo(parametroEjercicio, 6, separador));
+            repeticiones = Integer.parseInt(obtenerAtributo(parametroEjercicio, 7, separador));
+        }catch(Exception e){
+            series=0;
+            repeticiones=0;
+        }
+        String tiempo= obtenerAtributo(parametroEjercicio, 8, separador);
+
+        try{
+            ejercicio=new Ejercicio(idEjercicio,dia,nombre,descripcion,tipo,rutaImg,series,repeticiones,tiempo);
+        }catch(Exception e){
+            return null;
+        }
+
+
+        return ejercicio;
     }
 
     public static Object[] obtenerTrabajador(String parametroTrabajador) {
@@ -176,6 +256,17 @@ public class Utilidades {
         return atributosCliente;
 
     }
+    public static Object[] obtenerTabla(String parametroCliente) {
+        Object[] atributosTabla = new Object[3];
+        final String separador = "$";
+        atributosTabla[0] = Integer.parseInt(obtenerAtributo(parametroCliente, 0, separador));    //id
+        atributosTabla[1] = obtenerAtributo(parametroCliente, 1, separador);                      //Nombre
+        atributosTabla[2] = Integer.parseInt(obtenerAtributo(parametroCliente, 2, separador));    //Numero dias
+
+        return atributosTabla;
+
+    }
+    
 
     public static String[] obtenerHorario(String parametroCliente) {
         String[] atributosHorario = new String[5];

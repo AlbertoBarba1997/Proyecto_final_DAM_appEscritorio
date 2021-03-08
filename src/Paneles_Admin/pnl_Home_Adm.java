@@ -6,6 +6,9 @@
 package Paneles_Admin;
 
 import Interfaces.Menu_admin_interfaz;
+import Paneles_coach.pnl_AltaClase;
+import Paneles_coach.pnl_Clases;
+import Paneles_coach.pnl_Horario;
 import Util.Utilidades;
 import java.awt.Font;
 import java.awt.font.TextAttribute;
@@ -14,6 +17,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -51,7 +55,6 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
         altaTrabajadores_lb = new javax.swing.JLabel();
         verTrabajadores_lb = new javax.swing.JLabel();
         nuevoRol_lb = new javax.swing.JLabel();
@@ -60,6 +63,15 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
         altaCliente_lb = new javax.swing.JLabel();
         verClientes_lb8 = new javax.swing.JLabel();
         bajaCliente_lb = new javax.swing.JLabel();
+        altaTrabajadores_lb1 = new javax.swing.JLabel();
+        verTrabajadores_lb1 = new javax.swing.JLabel();
+        bajaTrabajador_lb1 = new javax.swing.JLabel();
+        trabajadores_foto_lbl1 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        roles_lb1 = new javax.swing.JLabel();
+        claves_foto_lbl1 = new javax.swing.JLabel();
+        roles_lb2 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(186, 79, 84));
         setOpaque(false);
@@ -91,23 +103,19 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("CLIENTES");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("TRABAJADORES");
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("CLAVES DE ACCESO");
 
-        jLabel4.setFont(new java.awt.Font("Dialog", 2, 20)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Bienvenido, seleccione una opcion:");
-
-        altaTrabajadores_lb.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        altaTrabajadores_lb.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
         altaTrabajadores_lb.setForeground(new java.awt.Color(255, 255, 255));
         altaTrabajadores_lb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         altaTrabajadores_lb.setText("Alta trabajador");
@@ -123,7 +131,7 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
             }
         });
 
-        verTrabajadores_lb.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        verTrabajadores_lb.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
         verTrabajadores_lb.setForeground(new java.awt.Color(255, 255, 255));
         verTrabajadores_lb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         verTrabajadores_lb.setText("Ver trabajadores");
@@ -139,7 +147,7 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
             }
         });
 
-        nuevoRol_lb.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        nuevoRol_lb.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
         nuevoRol_lb.setForeground(new java.awt.Color(255, 255, 255));
         nuevoRol_lb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         nuevoRol_lb.setText("Crear nuevo rol de trabajador");
@@ -155,7 +163,7 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
             }
         });
 
-        bajaTrabajador_lb.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        bajaTrabajador_lb.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
         bajaTrabajador_lb.setForeground(new java.awt.Color(255, 255, 255));
         bajaTrabajador_lb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bajaTrabajador_lb.setText("Baja / Modificacion trabajador");
@@ -171,7 +179,7 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
             }
         });
 
-        roles_lb.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        roles_lb.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
         roles_lb.setForeground(new java.awt.Color(255, 255, 255));
         roles_lb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         roles_lb.setText("Administrar roles y claves");
@@ -187,7 +195,7 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
             }
         });
 
-        altaCliente_lb.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        altaCliente_lb.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
         altaCliente_lb.setForeground(new java.awt.Color(255, 255, 255));
         altaCliente_lb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         altaCliente_lb.setText("Alta cliente");
@@ -203,7 +211,7 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
             }
         });
 
-        verClientes_lb8.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        verClientes_lb8.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
         verClientes_lb8.setForeground(new java.awt.Color(255, 255, 255));
         verClientes_lb8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         verClientes_lb8.setText("Ver clientes");
@@ -219,7 +227,7 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
             }
         });
 
-        bajaCliente_lb.setFont(new java.awt.Font("SansSerif", 2, 24)); // NOI18N
+        bajaCliente_lb.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
         bajaCliente_lb.setForeground(new java.awt.Color(255, 255, 255));
         bajaCliente_lb.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bajaCliente_lb.setText("Baja / Modificacion cliente");
@@ -235,77 +243,237 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
             }
         });
 
+        altaTrabajadores_lb1.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
+        altaTrabajadores_lb1.setForeground(new java.awt.Color(255, 255, 255));
+        altaTrabajadores_lb1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        altaTrabajadores_lb1.setText("Baja clase");
+        altaTrabajadores_lb1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                altaTrabajadores_lb1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                altaTrabajadores_lb1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                altaTrabajadores_lb1MouseExited(evt);
+            }
+        });
+
+        verTrabajadores_lb1.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
+        verTrabajadores_lb1.setForeground(new java.awt.Color(255, 255, 255));
+        verTrabajadores_lb1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        verTrabajadores_lb1.setText("Alta nueva clase");
+        verTrabajadores_lb1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                verTrabajadores_lb1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                verTrabajadores_lb1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                verTrabajadores_lb1MouseExited(evt);
+            }
+        });
+
+        bajaTrabajador_lb1.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
+        bajaTrabajador_lb1.setForeground(new java.awt.Color(255, 255, 255));
+        bajaTrabajador_lb1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bajaTrabajador_lb1.setText("Ver horario de clases");
+        bajaTrabajador_lb1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bajaTrabajador_lb1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                bajaTrabajador_lb1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                bajaTrabajador_lb1MouseExited(evt);
+            }
+        });
+
+        trabajadores_foto_lbl1.setForeground(new java.awt.Color(255, 255, 255));
+        trabajadores_foto_lbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/claseDefault.jpg"))); // NOI18N
+        trabajadores_foto_lbl1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                trabajadores_foto_lbl1MouseClicked(evt);
+            }
+        });
+
+        jLabel4.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("CLASES");
+
+        jLabel5.setFont(new java.awt.Font("Dialog", 1, 30)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("HORARIO Y RESERVAS");
+
+        roles_lb1.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
+        roles_lb1.setForeground(new java.awt.Color(255, 255, 255));
+        roles_lb1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        roles_lb1.setText("Alta/ Baja horarios");
+        roles_lb1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                roles_lb1MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                roles_lb1MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                roles_lb1MouseExited(evt);
+            }
+        });
+
+        claves_foto_lbl1.setForeground(new java.awt.Color(255, 255, 255));
+        claves_foto_lbl1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/horario.png"))); // NOI18N
+        claves_foto_lbl1.setMaximumSize(new java.awt.Dimension(600, 400));
+        claves_foto_lbl1.setMinimumSize(new java.awt.Dimension(600, 400));
+        claves_foto_lbl1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                claves_foto_lbl1MouseClicked(evt);
+            }
+        });
+
+        roles_lb2.setFont(new java.awt.Font("SansSerif", 2, 20)); // NOI18N
+        roles_lb2.setForeground(new java.awt.Color(255, 255, 255));
+        roles_lb2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        roles_lb2.setText("Restablecer reservas");
+        roles_lb2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                roles_lb2MouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                roles_lb2MouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                roles_lb2MouseExited(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(69, 69, 69)
+                .addGap(52, 52, 52)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(258, 258, 258)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(roles_lb, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(claves_foto_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(40, 40, 40)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)
-                                .addGap(168, 168, 168))
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel3)))
+                        .addGap(131, 131, 131)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(roles_lb2, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(bajaTrabajador_lb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(trabajadores_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(altaTrabajadores_lb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                    .addComponent(verTrabajadores_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(74, 74, 74)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(clientes_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(verClientes_lb8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(altaCliente_lb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(bajaCliente_lb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(75, 75, 75)))
+                                    .addComponent(roles_lb1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(claves_foto_lbl1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addGap(14, 14, 14)))
+                                .addGap(6, 6, 6)))
+                        .addContainerGap(191, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(claves_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(roles_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(nuevoRol_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(72, Short.MAX_VALUE))
+                            .addComponent(nuevoRol_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(bajaTrabajador_lb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(trabajadores_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(altaTrabajadores_lb, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(verTrabajadores_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel2)))
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(clientes_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(verClientes_lb8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(altaCliente_lb, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(bajaCliente_lb, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(bajaTrabajador_lb1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(trabajadores_foto_lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(altaTrabajadores_lb1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(verTrabajadores_lb1, javax.swing.GroupLayout.PREFERRED_SIZE, 366, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(74, 74, 74))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(95, 95, 95)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel4)
+                                .addGap(191, 191, 191))))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(89, 89, 89)
-                .addComponent(jLabel4)
-                .addGap(58, 58, 58)
+                .addGap(30, 30, 30)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(claves_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(clientes_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(trabajadores_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(trabajadores_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(verTrabajadores_lb)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(altaTrabajadores_lb)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(bajaTrabajador_lb))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(verClientes_lb8)
-                            .addComponent(roles_lb))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(verClientes_lb8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(altaCliente_lb)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(bajaCliente_lb))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(clientes_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(120, 120, 120))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(trabajadores_foto_lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(altaCliente_lb)
-                        .addGap(18, 18, 18)
-                        .addComponent(bajaCliente_lb)))
-                .addGap(18, 18, 18)
+                        .addComponent(verTrabajadores_lb1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(altaTrabajadores_lb1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bajaTrabajador_lb1)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(nuevoRol_lb)
-                .addContainerGap(206, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(claves_foto_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(roles_lb)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(claves_foto_lbl1, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(roles_lb1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(roles_lb2)
+                        .addContainerGap(33, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -418,23 +586,102 @@ public class pnl_Home_Adm extends javax.swing.JPanel {
         Utilidades.opcionFocusLost(evt);
     }//GEN-LAST:event_bajaCliente_lbMouseExited
 
+    private void altaTrabajadores_lb1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_altaTrabajadores_lb1MouseClicked
+        interfaz_menu_padre.cambiarPanelContenido(new pnl_Clases(interfaz_menu_padre, inSocket, outSocket));
+    }//GEN-LAST:event_altaTrabajadores_lb1MouseClicked
+
+    private void altaTrabajadores_lb1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_altaTrabajadores_lb1MouseEntered
+        Utilidades.opcionFocusGained(evt);
+    }//GEN-LAST:event_altaTrabajadores_lb1MouseEntered
+
+    private void altaTrabajadores_lb1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_altaTrabajadores_lb1MouseExited
+         Utilidades.opcionFocusLost(evt);
+    }//GEN-LAST:event_altaTrabajadores_lb1MouseExited
+
+    private void verTrabajadores_lb1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verTrabajadores_lb1MouseClicked
+        interfaz_menu_padre.cambiarPanelContenido(new pnl_AltaClase(interfaz_menu_padre, inSocket, outSocket));
+    }//GEN-LAST:event_verTrabajadores_lb1MouseClicked
+
+    private void verTrabajadores_lb1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verTrabajadores_lb1MouseEntered
+        Utilidades.opcionFocusGained(evt);
+    }//GEN-LAST:event_verTrabajadores_lb1MouseEntered
+
+    private void verTrabajadores_lb1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_verTrabajadores_lb1MouseExited
+         Utilidades.opcionFocusLost(evt);
+    }//GEN-LAST:event_verTrabajadores_lb1MouseExited
+
+    private void bajaTrabajador_lb1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bajaTrabajador_lb1MouseClicked
+        interfaz_menu_padre.cambiarPanelContenido(new pnl_Horario(interfaz_menu_padre, inSocket, outSocket));
+    }//GEN-LAST:event_bajaTrabajador_lb1MouseClicked
+
+    private void bajaTrabajador_lb1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bajaTrabajador_lb1MouseEntered
+       Utilidades.opcionFocusGained(evt);
+    }//GEN-LAST:event_bajaTrabajador_lb1MouseEntered
+
+    private void bajaTrabajador_lb1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bajaTrabajador_lb1MouseExited
+         Utilidades.opcionFocusLost(evt);
+    }//GEN-LAST:event_bajaTrabajador_lb1MouseExited
+
+    private void trabajadores_foto_lbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_trabajadores_foto_lbl1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_trabajadores_foto_lbl1MouseClicked
+
+    private void roles_lb1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roles_lb1MouseClicked
+        interfaz_menu_padre.cambiarPanelContenido(new pnl_Horario(interfaz_menu_padre, inSocket, outSocket));
+    }//GEN-LAST:event_roles_lb1MouseClicked
+
+    private void roles_lb1MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roles_lb1MouseEntered
+        Utilidades.opcionFocusGained(evt);
+    }//GEN-LAST:event_roles_lb1MouseEntered
+
+    private void roles_lb1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roles_lb1MouseExited
+         Utilidades.opcionFocusLost(evt);
+    }//GEN-LAST:event_roles_lb1MouseExited
+
+    private void claves_foto_lbl1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_claves_foto_lbl1MouseClicked
+        interfaz_menu_padre.cambiarPanelContenido(new pnl_Horario(interfaz_menu_padre, inSocket, outSocket));
+    }//GEN-LAST:event_claves_foto_lbl1MouseClicked
+
+    private void roles_lb2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roles_lb2MouseClicked
+        int respuesta=JOptionPane.showConfirmDialog(null, "¿Quiere eliminar todas las reservas hechas hasta el momento?","Confirmar",0);
+        if(respuesta==0){
+            interfaz_menu_padre.resetearReservas();
+        }
+    }//GEN-LAST:event_roles_lb2MouseClicked
+
+    private void roles_lb2MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roles_lb2MouseEntered
+        Utilidades.opcionFocusGained(evt);
+    }//GEN-LAST:event_roles_lb2MouseEntered
+
+    private void roles_lb2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_roles_lb2MouseExited
+         Utilidades.opcionFocusLost(evt);
+    }//GEN-LAST:event_roles_lb2MouseExited
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel altaCliente_lb;
     private javax.swing.JLabel altaTrabajadores_lb;
+    private javax.swing.JLabel altaTrabajadores_lb1;
     private javax.swing.JLabel bajaCliente_lb;
     private javax.swing.JLabel bajaTrabajador_lb;
+    private javax.swing.JLabel bajaTrabajador_lb1;
     private javax.swing.JLabel claves_foto_lbl;
+    private javax.swing.JLabel claves_foto_lbl1;
     private javax.swing.JLabel clientes_foto_lbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel nuevoRol_lb;
     private javax.swing.JLabel roles_lb;
+    private javax.swing.JLabel roles_lb1;
+    private javax.swing.JLabel roles_lb2;
     private javax.swing.JLabel trabajadores_foto_lbl;
+    private javax.swing.JLabel trabajadores_foto_lbl1;
     private javax.swing.JLabel verClientes_lb8;
     private javax.swing.JLabel verTrabajadores_lb;
+    private javax.swing.JLabel verTrabajadores_lb1;
     // End of variables declaration//GEN-END:variables
 
 

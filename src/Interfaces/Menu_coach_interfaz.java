@@ -12,7 +12,7 @@ import Paneles_coach.pnl_AltaClase;
 import Paneles_coach.pnl_AltaTabla;
 import Paneles_coach.pnl_Clases;
 import Paneles_coach.pnl_Ejercicios;
-import Paneles_coach.pnl_Home_Coach;
+
 import Paneles_coach.pnl_Horario;
 import Paneles_coach.pnl_Rutinas;
 import Paneles_coach.pnl_VerClientes;
@@ -45,6 +45,7 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
         setLocationRelativeTo(this);
         colorFondo=new Color(186,79,84);
         
+        
     }
     
      public Menu_coach_interfaz(BufferedReader inSocket,PrintWriter outSocket, String nombreUsuario) {
@@ -62,6 +63,8 @@ public class Menu_coach_interfaz extends javax.swing.JFrame {
          this.nombreUsuario_lb.setText(nombreUsuario);
 
          setLocationRelativeTo(this);
+         cambiarPanelContenido( new pnl_VerClientes(this,inSocket,outSocket));
+         
          //esconderMenu();
         
     }

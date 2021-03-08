@@ -10,8 +10,10 @@ import Paneles_Admin.pnl_Claves;
 import Paneles_Admin.pnl_Clientes;
 import Paneles_Admin.pnl_Home_Adm;
 import Paneles_Admin.pnl_Trabajadores;
+import Paneles_coach.pnl_AltaTabla;
 import Paneles_coach.pnl_Clases;
 import Paneles_coach.pnl_Horario;
+import Util.Utilidades;
 
 import java.awt.Color;
 import java.io.BufferedReader;
@@ -19,6 +21,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -72,6 +79,7 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         barra_panel = new javax.swing.JPanel();
         rSButtonMetro1 = new Recursos.RSButtonMetro();
@@ -87,6 +95,7 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
         cerrarSession_bt = new Recursos.RSButtonMetro();
         clases_bt1 = new Recursos.RSButtonMetro();
         clases_bt = new Recursos.RSButtonMetro();
+        clases_bt2 = new Recursos.RSButtonMetro();
         contenido_panel = new javax.swing.JPanel();
         contenidofake_lbl = new javax.swing.JLabel();
 
@@ -285,6 +294,25 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
             }
         });
 
+        clases_bt2.setBackground(new java.awt.Color(74, 31, 61));
+        clases_bt2.setForeground(new java.awt.Color(204, 204, 204));
+        clases_bt2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_reset_40px.png"))); // NOI18N
+        clases_bt2.setText("RESET. RESERVAS");
+        clases_bt2.setColorHover(new java.awt.Color(112, 62, 97));
+        clases_bt2.setColorNormal(new java.awt.Color(74, 31, 61));
+        clases_bt2.setColorTextHover(new java.awt.Color(204, 204, 204));
+        clases_bt2.setColorTextNormal(new java.awt.Color(204, 204, 204));
+        clases_bt2.setColorTextPressed(new java.awt.Color(204, 204, 204));
+        clases_bt2.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        clases_bt2.setHideActionText(true);
+        clases_bt2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        clases_bt2.setIconTextGap(12);
+        clases_bt2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clases_bt2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout menu_panelLayout = new javax.swing.GroupLayout(menu_panel);
         menu_panel.setLayout(menu_panelLayout);
         menu_panelLayout.setHorizontalGroup(
@@ -293,15 +321,12 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
             .addComponent(clientes_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(trabajadores_bt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(nombreUsuario_lb, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+            .addComponent(nombreUsuario_lb, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(clavesAcceso_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, menu_panelLayout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addGroup(menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(clases_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(clases_bt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+            .addComponent(clavesAcceso_bt, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+            .addComponent(clases_bt, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(clases_bt1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(clases_bt2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         menu_panelLayout.setVerticalGroup(
             menu_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -322,11 +347,13 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
                 .addComponent(clases_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(clases_bt1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 282, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(clases_bt2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE)
                 .addComponent(cerrarSession_bt, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel1.add(menu_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 260, 850));
+        jPanel1.add(menu_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 280, 850));
 
         contenido_panel.setBackground(new java.awt.Color(255, 255, 255));
         contenido_panel.setForeground(new java.awt.Color(255, 255, 255));
@@ -346,7 +373,7 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
         contenidofake_lbl.setText("HOME");
         contenido_panel.add(contenidofake_lbl);
 
-        jPanel1.add(contenido_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 50, 1390, 850));
+        jPanel1.add(contenido_panel, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 50, 1370, 850));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -437,6 +464,13 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
 
         cambiarPanelContenido( new pnl_Clases(this,inSocket,outSocket));
     }//GEN-LAST:event_clases_btActionPerformed
+
+    private void clases_bt2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clases_bt2ActionPerformed
+        int respuesta=JOptionPane.showConfirmDialog(null, "¿Quiere eliminar todas las reservas hechas hasta el momento?","Confirmar",0);
+        if(respuesta==0){
+            resetearReservas();
+        }
+    }//GEN-LAST:event_clases_bt2ActionPerformed
    
     
     
@@ -514,9 +548,11 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel barra_panel;
+    private javax.swing.ButtonGroup buttonGroup1;
     private Recursos.RSButtonMetro cerrarSession_bt;
     private Recursos.RSButtonMetro clases_bt;
     private Recursos.RSButtonMetro clases_bt1;
+    private Recursos.RSButtonMetro clases_bt2;
     private Recursos.RSButtonMetro clavesAcceso_bt;
     private Recursos.RSButtonMetro clientes_bt;
     private javax.swing.JPanel contenido_panel;
@@ -545,6 +581,34 @@ public class Menu_admin_interfaz extends javax.swing.JFrame {
     
     public void cambiarPanelContenido(JPanel panelNuevo){
         new CambiaPanel(this.contenido_panel, panelNuevo);
+    }
+
+    public void resetearReservas() {
+        
+       
+        
+        Thread thread_eliminarReservas = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    outSocket.write("C46-RESETEAR_RESERVAS\n");
+                    outSocket.flush();
+
+                    String respuestaServidor = inSocket.readLine();
+                    if (respuestaServidor.contains("S68-RESETEADAS")) {
+                        JOptionPane.showMessageDialog(null, "Todas las reservas han sido eliminadas");
+                    } else {
+                        System.out.println("Respuesta erronea del server:" + respuestaServidor);
+                        JOptionPane.showMessageDialog(null, "Error servidor.");
+                    }
+
+                } catch (IOException ex) {
+                    Logger.getLogger(pnl_AltaTabla.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        });
+        thread_eliminarReservas.setDaemon(true);
+        thread_eliminarReservas.start();
     }
 
     

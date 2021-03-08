@@ -887,7 +887,7 @@ public class pnl_Horario extends javax.swing.JPanel {
             //1. Comprobar tabla a tabla si hay alguna con un horario seleccioando
             if (filaSeleccionada != -1) {
                 //2. Si es asi, extraemos el id del horario que deseamos eliminar
-                int idHorarioSeleccionado = (int) jTable1.getValueAt(filaSeleccionada, 2);  //(Este id esta almacenado en la tabla ya, en una columna invisible)
+                int idHorarioSeleccionado = (int) tabla.getValueAt(filaSeleccionada, 2);  //(Este id esta almacenado en la tabla ya, en una columna invisible)
 
                 //3 (en hilo) Mandar un mensaje al servidor "C30-ELIMINAR_HORARIO:id"
                 eliminarHorario(idHorarioSeleccionado);
@@ -1076,40 +1076,6 @@ public class pnl_Horario extends javax.swing.JPanel {
     private javax.swing.JLabel titulo_lb;
     // End of variables declaration//GEN-END:variables
 
-    private void cargarTablaClases() {
-        Thread thread_cargarTrabajadores = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    //1 Solicitar al servidor el listado de trabajadores (String)
-                    outSocket.write("C22-LISTAR_CLASES\n");
-                    outSocket.flush();
-
-                    String respuestaServidor = inSocket.readLine();
-                    if (respuestaServidor.contains("S12-ERROR_QUERY")) {
-                        System.out.println("Error al cargar la query (pendiente)");
-                    } else if (respuestaServidor.contains("S31-LISTA_CLASES")) {
-                        defaultTableMode.setRowCount(0);
-                        int numeroDeUsuarios = Utilidades.contarParametros(respuestaServidor);
-                        for (int i = 0; i < numeroDeUsuarios; i++) {
-                            String nombreClase = Utilidades.obtenerParametro(respuestaServidor, i + 1);
-                            String[] nombre = {nombreClase};
-                            defaultTableMode.addRow(nombre);
-                        }
-
-                    } else {
-                        System.out.println("Respuesta erronea del server:" + respuestaServidor);
-                    }
-
-                } catch (IOException ex) {
-                    Logger.getLogger(pnl_Horario.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        });
-
-        thread_cargarTrabajadores.start();
-
-    }
     
     private void eliminarHorario(int idHorario) {
         Thread thread_eliminarHorario = new Thread(new Runnable() {

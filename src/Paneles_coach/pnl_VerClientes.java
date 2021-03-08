@@ -82,15 +82,16 @@ public class pnl_VerClientes extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         patronBuscar_tf = new javax.swing.JTextField();
+        CrearTablaPersonalizada_lb2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        fecha_lbl = new javax.swing.JLabel();
+        notas_lbl = new javax.swing.JLabel();
+        altura_lbl = new javax.swing.JLabel();
         imagen_lbl = new javax.swing.JLabel();
         dni_lbl = new javax.swing.JLabel();
         nombre_lbl = new javax.swing.JLabel();
         apellido_lbl = new javax.swing.JLabel();
         peso_lbl = new javax.swing.JLabel();
-        fecha_lbl = new javax.swing.JLabel();
-        notas_lbl = new javax.swing.JLabel();
-        altura_lbl = new javax.swing.JLabel();
-        CrearTablaPersonalizada_lb2 = new javax.swing.JLabel();
 
         setOpaque(false);
         setPreferredSize(new java.awt.Dimension(1390, 850));
@@ -216,37 +217,6 @@ public class pnl_VerClientes extends javax.swing.JPanel {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        imagen_lbl.setBackground(new java.awt.Color(204, 204, 204));
-
-        dni_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        dni_lbl.setForeground(new java.awt.Color(255, 255, 255));
-        dni_lbl.setText(" ");
-
-        nombre_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        nombre_lbl.setForeground(new java.awt.Color(255, 255, 255));
-        nombre_lbl.setText(" ");
-
-        apellido_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        apellido_lbl.setForeground(new java.awt.Color(255, 255, 255));
-        apellido_lbl.setText(" ");
-
-        peso_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        peso_lbl.setForeground(new java.awt.Color(255, 255, 255));
-        peso_lbl.setText(" ");
-
-        fecha_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        fecha_lbl.setForeground(new java.awt.Color(255, 255, 255));
-        fecha_lbl.setText(" ");
-
-        notas_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        notas_lbl.setForeground(new java.awt.Color(255, 255, 255));
-        notas_lbl.setText(" ");
-        notas_lbl.setVerticalAlignment(javax.swing.SwingConstants.TOP);
-
-        altura_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
-        altura_lbl.setForeground(new java.awt.Color(255, 255, 255));
-        altura_lbl.setText(" ");
-
         CrearTablaPersonalizada_lb2.setFont(new java.awt.Font("Dialog", 2, 18)); // NOI18N
         CrearTablaPersonalizada_lb2.setForeground(new java.awt.Color(255, 255, 255));
         CrearTablaPersonalizada_lb2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icons8_new_30px.png"))); // NOI18N
@@ -263,42 +233,110 @@ public class pnl_VerClientes extends javax.swing.JPanel {
             }
         });
 
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        jPanel2.setOpaque(false);
+
+        fecha_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        fecha_lbl.setForeground(new java.awt.Color(255, 255, 255));
+        fecha_lbl.setText("Fecha de nacimiento:");
+
+        notas_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        notas_lbl.setForeground(new java.awt.Color(255, 255, 255));
+        notas_lbl.setText("Notas:");
+        notas_lbl.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+
+        altura_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        altura_lbl.setForeground(new java.awt.Color(255, 255, 255));
+        altura_lbl.setText("Altura:");
+
+        imagen_lbl.setBackground(new java.awt.Color(204, 204, 204));
+        imagen_lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        imagen_lbl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/user-male.png"))); // NOI18N
+
+        dni_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        dni_lbl.setForeground(new java.awt.Color(255, 255, 255));
+        dni_lbl.setText("DNI:");
+
+        nombre_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        nombre_lbl.setForeground(new java.awt.Color(255, 255, 255));
+        nombre_lbl.setText("Nombre:");
+
+        apellido_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        apellido_lbl.setForeground(new java.awt.Color(255, 255, 255));
+        apellido_lbl.setText("Apellidos:");
+
+        peso_lbl.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        peso_lbl.setForeground(new java.awt.Color(255, 255, 255));
+        peso_lbl.setText("Peso: ");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 633, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(50, 50, 50)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(altura_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(notas_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(dni_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(fecha_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                        .addComponent(nombre_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(apellido_lbl, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(peso_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGap(18, 18, 18)
+                    .addComponent(imagen_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(50, Short.MAX_VALUE)))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 301, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGap(23, 23, 23)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(imagen_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(dni_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(nombre_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(apellido_lbl)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(fecha_lbl)
+                            .addGap(12, 12, 12)
+                            .addComponent(peso_lbl)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(altura_lbl)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(notas_lbl)))
+                    .addContainerGap(28, Short.MAX_VALUE)))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1265, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(titulo_lb)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(326, 326, 326)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(dni_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombre_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(apellido_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(peso_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(fecha_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(notas_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(altura_lbl, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(imagen_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1265, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(titulo_lb))
                 .addContainerGap(66, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CrearTablaPersonalizada_lb2)
+                .addGap(26, 26, 26)
+                .addComponent(asignarTablaModelo_lb)
+                .addGap(445, 445, 445))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(error_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(359, 359, 359))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(CrearTablaPersonalizada_lb2)
-                        .addGap(26, 26, 26)
-                        .addComponent(asignarTablaModelo_lb)
-                        .addGap(515, 515, 515))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(error_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 647, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(359, 359, 359))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -315,24 +353,9 @@ public class pnl_VerClientes extends javax.swing.JPanel {
                     .addComponent(CrearTablaPersonalizada_lb2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(error_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(dni_lbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(nombre_lbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(apellido_lbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fecha_lbl)
-                        .addGap(12, 12, 12)
-                        .addComponent(peso_lbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(altura_lbl)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(notas_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(imagen_lbl, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -432,6 +455,7 @@ public class pnl_VerClientes extends javax.swing.JPanel {
     private javax.swing.JLabel imagen_lbl;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel nombre_lbl;
@@ -659,7 +683,7 @@ public class pnl_VerClientes extends javax.swing.JPanel {
             private void cargarImagenNoDisponible() {
 
                 try {
-                    File imagenNoDisponible = new File("./src/Recursos/FotoNoDisponible.jpg");
+                    File imagenNoDisponible = new File("./src/Recursos/user-male.png");
                     byte[] imagenTotal = Files.readAllBytes(imagenNoDisponible.toPath());
                     final int ANCHURA_IMG = 200;
                     final int ALTURA_IMG = 250;

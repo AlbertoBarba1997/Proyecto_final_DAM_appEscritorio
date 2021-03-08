@@ -323,6 +323,7 @@ public class pnl_Trabajadores extends javax.swing.JPanel {
 
             //2 Obtener el dni (2 columna) del trabajador seleccionado
             String dniSeleccionado = (String) jTable1.getValueAt(filaSeleccionada, 0);
+            System.out.println("DNI seleccionado"+dniSeleccionado);
 
             //3 (en hilo) Mandar un mensaje al servidor "C7-ELIMINAR_TRABAJADOR:dni"
             eliminarTrabajador(dniSeleccionado);
@@ -469,7 +470,6 @@ public class pnl_Trabajadores extends javax.swing.JPanel {
                         for (int i = 0; i < numeroDeUsuarios; i++) {
                             String parametroTrabajador = Utilidades.obtenerParametro(respuestaServidor, i + 1);
                             Object[] atributosTrabajador = Utilidades.obtenerTrabajador(parametroTrabajador);
-                            System.out.println("fila:" + atributosTrabajador);
                             defaultTableMode.addRow(atributosTrabajador);
                         }
 
